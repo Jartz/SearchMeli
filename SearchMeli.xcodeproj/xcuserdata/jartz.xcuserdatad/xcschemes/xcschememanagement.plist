@@ -7,7 +7,25 @@
 		<key>SearchMeli.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>5</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>556F659B2817740D006AC890</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>556F65B12817740F006AC890</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>556F65BB2817740F006AC890</key>
+		<dict>
+			<key>primary</key>
+			<true/>
 		</dict>
 	</dict>
 </dict>
