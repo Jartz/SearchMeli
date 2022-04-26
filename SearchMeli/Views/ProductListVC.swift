@@ -6,9 +6,18 @@
 //
 
 import UIKit
+import Combine
 
 
 class ProductListVC: UIViewController, NavigationSearchDelegate {
+
+    private var viewModel = SearchVM()
+    private var canellables: Set<AnyCancellable> = []
+    
+    func textDidChange(text: String) {
+        viewModel.getProductList(text: text)
+    }
+    
     func actionBackButton() {
         print("actionBackButton")
         self.dismiss(animated: false, completion: nil)
@@ -18,9 +27,18 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .yellow
-        
+
+        viewModel = SearchVM()
        let data = NavigationSearch(vc: self)
         data.delegate = self
+        binding()
+       
+    }
+    
+    func binding(){
+        viewModel.$dataSource.sink { data in
+            print(data)
+        }.store(in: &canellables)
     }
     
     override func viewWillAppear(_ animated: Bool) {

@@ -13,14 +13,14 @@ public enum Environment: String, CaseIterable {
 }
 
 extension Environment {
-    var purchaseServiceBaseUrl: String {
+    var meliServiceBaseUrl: String {
         switch self {
         case .development:
-            return "https://dev-combine.com/purchaseService"
+            return "https://api.mercadolibre.com"
         case .staging:
-            return "https://stg-combine.com/purchaseService"
+            return "https://api.mercadolibre.com"
         case .production:
-            return "https://combine.com/purchaseService"
+            return "https://api.mercadolibre.com"
         }
     }
 }

@@ -11,6 +11,7 @@ import SnapKit
 
 protocol NavigationSearchDelegate {
     func actionBackButton()
+    func textDidChange(text:String)
 }
 
 class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate  {
@@ -146,6 +147,7 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
     
 
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        self.delegate?.textDidChange(text: searchText)
         print(searchText)
     }
 }

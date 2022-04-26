@@ -12,6 +12,7 @@ enum PurchaseServiceEndpoints {
   // organise all the end points here for clarity
     case purchaseProduct(request: PurchaseRequest)
     case getProduct(productId: Int)
+    case getProductList(text: String)
     case cancelOrder(orderId: Int)
     
   // gave a default timeout but can be different for each.
@@ -25,7 +26,7 @@ enum PurchaseServiceEndpoints {
         case .purchaseProduct,
              .cancelOrder:
             return .POST
-        case .getProduct:
+        case .getProduct,.getProductList:
             return .GET
         }
     }
@@ -50,8 +51,10 @@ enum PurchaseServiceEndpoints {
     
   // compose urls for each request
     func getURL(from environment: Environment) -> String {
-        let baseUrl = environment.purchaseServiceBaseUrl
+        let baseUrl = environment.meliServiceBaseUrl
         switch self {
+        case .getProductList(let text):
+            return "\(baseUrl)/sites/MCO/search?q=\(text)"
         case .purchaseProduct:
             return "\(baseUrl)/purchase"
         case .getProduct(let productId):

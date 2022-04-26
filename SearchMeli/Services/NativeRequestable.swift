@@ -12,7 +12,7 @@ public class NativeRequestable: Requestable {
     public var requestTimeOut: Float = 30
 
     public func request<T>(_ req: NetworkRequest) -> AnyPublisher<T, NetworkError>
-     where T: Decodable, T: Encodable {
+     where T: Decodable {
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = TimeInterval(req.requestTimeOut ?? requestTimeOut)
         

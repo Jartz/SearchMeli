@@ -10,13 +10,13 @@ import Foundation
 
 protocol MeliServiceable {
     func purchaseProduct(request: PurchaseRequest) -> AnyPublisher<PurchaseResponse, NetworkError>
-    func getProduct(productId: Int) -> AnyPublisher<ProductModel, NetworkError>
-  //Instead of using Void I use NoReply for requests that might give 200 with empty response
-    func cancelOrder(_ orderId: Int) -> AnyPublisher<ProductModel, NetworkError>
+    func getProduct(productId: Int) -> AnyPublisher<ProductResponse, NetworkError>
+    func getProductList(text: String) -> AnyPublisher<ProductResponse, NetworkError>
+    func cancelOrder(_ orderId: Int) -> AnyPublisher<ProductResponse, NetworkError>
 }
 
 class MeliService: MeliServiceable {
-  
+
     private var networkRequest: Requestable
     private var environment: Environment = .development
     
@@ -24,6 +24,13 @@ class MeliService: MeliServiceable {
     init(networkRequest: Requestable, environment: Environment) {
         self.networkRequest = networkRequest
         self.environment = environment
+    }
+    
+    func getProductList(text: String) -> AnyPublisher<ProductResponse, NetworkError> {
+        let endpoint = PurchaseServiceEndpoints.getProductList(text: text)
+        let request = endpoint.createRequest(token: "$ACCESS_TOKEN",
+                                             environment: self.environment)
+        return self.networkRequest.request(request)
     }
 
     func purchaseProduct(request: PurchaseRequest) -> AnyPublisher<PurchaseResponse, NetworkError> {
@@ -33,14 +40,14 @@ class MeliService: MeliServiceable {
         return self.networkRequest.request(request)
     }
     
-    func getProduct(productId: Int) -> AnyPublisher<ProductModel, NetworkError> {
+    func getProduct(productId: Int) -> AnyPublisher<ProductResponse, NetworkError> {
         let endpoint = PurchaseServiceEndpoints.getProduct(productId: productId)
         let request = endpoint.createRequest(token: "token",
                                              environment: self.environment)
         return self.networkRequest.request(request)
     }
     
-    func cancelOrder(_ orderId: Int) -> AnyPublisher<ProductModel, NetworkError> {
+    func cancelOrder(_ orderId: Int) -> AnyPublisher<ProductResponse, NetworkError> {
         let endpoint = PurchaseServiceEndpoints.cancelOrder(orderId: orderId)
         let request = endpoint.createRequest(token: "token",
                                              environment: self.environment)
