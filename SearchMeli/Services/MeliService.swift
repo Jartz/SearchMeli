@@ -8,17 +8,15 @@
 import Combine
 import Foundation
 
-protocol PurchaseServiceable {
+protocol MeliServiceable {
     func purchaseProduct(request: PurchaseRequest) -> AnyPublisher<PurchaseResponse, NetworkError>
     func getProduct(productId: Int) -> AnyPublisher<ProductModel, NetworkError>
   //Instead of using Void I use NoReply for requests that might give 200 with empty response
     func cancelOrder(_ orderId: Int) -> AnyPublisher<ProductModel, NetworkError>
 }
 
-class PurchaseService: PurchaseServiceable {
+class MeliService: MeliServiceable {
   
-  
-    
     private var networkRequest: Requestable
     private var environment: Environment = .development
     

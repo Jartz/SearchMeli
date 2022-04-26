@@ -6,3 +6,11 @@
 //
 
 import Foundation
+
+
+
+
+public struct ProductModel: Codable {
+    public let id: Int
+    public let productName: String
+}
