@@ -21,7 +21,6 @@ class ProductListVC: UIViewController {
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .yellow
         viewModel = SearchVM()
         searchView = NavigationSearch(vc: self,blockInput: true)
         searchView.delegate = self
@@ -83,7 +82,7 @@ extension ProductListVC: NavigationSearchDelegate {
     
     func actionBackButton() {
         print("actionBackButton")
-        self.navigationController?.popViewController(animated: true)
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

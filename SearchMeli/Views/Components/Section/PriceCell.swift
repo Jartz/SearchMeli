@@ -14,7 +14,8 @@ class PriceCell : UITableViewCell  {
     
     var product : Result? {
         didSet {
-            priceLabel.text = "$ "+String(product?.price ?? 0)
+            let price = HelperCurrency.convertCurrency(price: product?.price ?? 0)
+            priceLabel.text = price
             coutasLabel.text = "Hasta 48 coutas"
             moreInformationLabel.text = "Más información"
             disocuntLabel.text = "51% OFF"
@@ -31,6 +32,7 @@ class PriceCell : UITableViewCell  {
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
+        self.selectionStyle = .none
         priceSection()
     }
     

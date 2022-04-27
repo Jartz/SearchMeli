@@ -122,7 +122,7 @@ extension ProducDetailVC : UITableViewDelegate, UITableViewDataSource  {
             return cell
         case 4:
             let cell = tableView.dequeueReusableCell(withIdentifier: "quantityCell", for: indexPath) as! QuantityCell
-            //cell.product = self.result
+            cell.product = self.result
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath) as! ButtonCell

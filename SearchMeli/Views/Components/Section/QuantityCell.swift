@@ -11,20 +11,26 @@ import UIKit
 
 class QuantityCell : UITableViewCell  {
     
-    var product : ProductModel? {
+    var product : Result? {
         didSet {
-//            productImage.image = product?.productImage
-//            productNameLabel.text = product?.productName
-//            productDescriptionLabel.text = product?.productDesc
+          
+            quantityLabel.text = "1"
+            let valueInStore =  "(\(String(product?.soldQuantity ?? 0)) Disponibles)"
+            quantityInStoreLabel.text = valueInStore
+            //productDescriptionLabel.text = product?.productDesc
         }
     }
     
     var quiantitySection: UIView!
     var titleLabel: UILabel!
     
+    var quantityLabel: UILabel!
+    var quantityInStoreLabel: UILabel!
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         self.backgroundColor = .clear
+        self.selectionStyle = .none
         quantitySection()
         
     }
@@ -46,15 +52,15 @@ class QuantityCell : UITableViewCell  {
         text1.text = "Cantidad:"
         text1.translatesAutoresizingMaskIntoConstraints = false
         
-        let text2 = UILabel()
-        text2.text = "1"
-        text2.font = UIFont.boldSystemFont(ofSize: 14)
-        text2.translatesAutoresizingMaskIntoConstraints = false
+        quantityLabel = UILabel()
+        quantityLabel.text = "1"
+        quantityLabel.font = UIFont.boldSystemFont(ofSize: 14)
+        quantityLabel.translatesAutoresizingMaskIntoConstraints = false
         
-        let text3 = UILabel()
-        text3.text = "(9 Disponibles)"
-        text3.translatesAutoresizingMaskIntoConstraints = false
-        text3.textColor = .gray.withAlphaComponent(0.4)
+        quantityInStoreLabel = UILabel()
+        quantityInStoreLabel.text = "(9 Disponibles)"
+        quantityInStoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        quantityInStoreLabel.textColor = .gray.withAlphaComponent(0.4)
         
         let image = UIImageView()
         image.image = UIImage(systemName: "chevron.forward")
@@ -64,8 +70,8 @@ class QuantityCell : UITableViewCell  {
         self.addSubview(titleLabel)
         self.addSubview(quiantitySection)
         quiantitySection.addSubview(text1)
-        quiantitySection.addSubview(text2)
-        quiantitySection.addSubview(text3)
+        quiantitySection.addSubview(quantityLabel)
+        quiantitySection.addSubview(quantityInStoreLabel)
         quiantitySection.addSubview(image)
         
         
@@ -89,15 +95,15 @@ class QuantityCell : UITableViewCell  {
             make.bottom.equalTo(quiantitySection.snp.bottom).offset(-10)
         }
         
-        text2.snp.makeConstraints { make in
+        quantityLabel.snp.makeConstraints { make in
             make.top.equalTo(quiantitySection.snp.top)
             make.leading.equalTo(text1.snp.trailing).offset(8)
             make.bottom.equalTo(quiantitySection.snp.bottom)
         }
         
-        text3.snp.makeConstraints { make in
+        quantityInStoreLabel.snp.makeConstraints { make in
             make.top.equalTo(quiantitySection.snp.top)
-            make.leading.equalTo(text2.snp.trailing).offset(16)
+            make.leading.equalTo(quantityLabel.snp.trailing).offset(16)
             make.bottom.equalTo(quiantitySection.snp.bottom)
         }
         

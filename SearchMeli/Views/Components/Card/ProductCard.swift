@@ -44,7 +44,7 @@ class ProductCard : UITableViewCell  {
     }
     
     var imageContainer: UIView!
-    var infoContainer: UIView!
+    var infoContainer: UIStackView!
     
     var titleLabel: UILabel!
     var imagenView: UIImageView!
@@ -77,9 +77,7 @@ class ProductCard : UITableViewCell  {
         
         self.addSubview(imageContainer)
         imageContainer.addSubview(imagenView)
-   
-        
-       
+
         imageContainer.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(10)
             make.leading.equalTo(self.snp.leading)
@@ -98,29 +96,31 @@ class ProductCard : UITableViewCell  {
     }
     
     func sectionInfo(){
-        infoContainer = UIView()
+        infoContainer = UIStackView()
         titleLabel = UILabel()
         priceLabel = UILabel()
         discountLabel = UILabel()
         freeShippingLabel = UILabel()
         nameSeller = UILabel()
         
-        self.addSubview(infoContainer)
         infoContainer.addSubview(titleLabel)
         infoContainer.addSubview(priceLabel)
         infoContainer.addSubview(discountLabel)
         infoContainer.addSubview(freeShippingLabel)
         infoContainer.addSubview(nameSeller)
         
+        infoContainer = UIStackView(arrangedSubviews: [titleLabel, freeShippingLabel,priceLabel,nameSeller,discountLabel])
+        infoContainer.axis = .vertical
+        infoContainer.distribution = .equalCentering
         
-        
+        self.addSubview(infoContainer)
+    
         infoContainer.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(20)
             make.leading.equalTo(imageContainer.snp.trailing).offset(8)
             make.trailing.equalTo(self.snp.trailing)
             make.bottom.equalTo(self.snp.bottom).offset(-20)
         }
-        
         
         titleLabel.numberOfLines = 3
         titleLabel.font = UIFont.systemFont(ofSize: 14)
@@ -133,41 +133,7 @@ class ProductCard : UITableViewCell  {
         freeShippingLabel.font = UIFont.systemFont(ofSize: 14)
         
         nameSeller.font = UIFont.systemFont(ofSize: 14)
-        
-        
-        titleLabel.snp.makeConstraints { make in
-            make.top.equalTo(infoContainer.snp.top)
-            make.leading.equalTo(infoContainer.snp.leading)
-            make.trailing.equalTo(infoContainer.snp.trailing)
-            make.height.equalTo(40)
-        }
-        
-        priceLabel.snp.makeConstraints { make in
-            make.top.equalTo(titleLabel.snp.bottom)
-            make.leading.equalTo(infoContainer.snp.leading)
-        }
-        
-        discountLabel.snp.makeConstraints { make in
-            make.centerY.equalTo(priceLabel.snp.centerY)
-            make.leading.equalTo(priceLabel.snp.trailing).offset(8)
-        }
-        
-        freeShippingLabel.snp.makeConstraints { make in
-            make.top.equalTo(priceLabel.snp.bottom)
-            make.leading.equalTo(infoContainer.snp.leading)
-            make.trailing.equalTo(infoContainer.snp.trailing)
-        }
-        
-        nameSeller.snp.makeConstraints { make in
-            make.top.equalTo(freeShippingLabel.snp.bottom)
-            make.leading.equalTo(infoContainer.snp.leading)
-            make.trailing.equalTo(infoContainer.snp.trailing)
-            make.bottom.equalTo(infoContainer.snp.bottom)
-        }
     }
-    
-    
-    
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
     }
