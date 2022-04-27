@@ -21,7 +21,7 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
         
         // Create Tab one
         let tabOne = HomeVC()
-        let tabOneBarItem = UITabBarItem(title: "Tab 1", image: UIImage(named: "defaultImage.png"), selectedImage: UIImage(named: "selectedImage.png"))
+        let tabOneBarItem = UITabBarItem(title: "Inicio", image: UIImage(named: "home-icon"), selectedImage: UIImage(named: "home-icon"))
         
         tabOne.tabBarItem = tabOneBarItem
         
@@ -33,7 +33,7 @@ class TabBarVC: UITabBarController, UITabBarControllerDelegate {
         tabTwo.tabBarItem = tabTwoBarItem2
 
         
-        self.viewControllers = [tabOne, tabTwo]
+        self.viewControllers = [tabOne]
     }
     
     // UITabBarControllerDelegate method
