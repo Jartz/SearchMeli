@@ -31,13 +31,17 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
     }()
     
     var searchBar: UISearchBar =  {
-        var label = UISearchBar()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+        var search = UISearchBar()
+        search.translatesAutoresizingMaskIntoConstraints = false
+        search.searchBarStyle = .minimal
+        search.searchTextField.backgroundColor = .white
+        search.backgroundColor = .clear
+        search.placeholder = "Buscar en Mercado libre"
+        search.searchTextField.layer.cornerRadius = 20
+        search.searchTextField.layer.masksToBounds = true
+        return search
     }()
-    
 
-    
     var backButton: UIButton =  {
         var btn = UIButton()
         btn.translatesAutoresizingMaskIntoConstraints = false
@@ -59,11 +63,6 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         return btn
     }()
     
-    var searchEditText : UITextField = {
-        var tf = UITextField()
-        tf.translatesAutoresizingMaskIntoConstraints = false
-        return tf
-    }()
     
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -114,7 +113,11 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         self.backButton.isHidden = !showBack
         
         self.searchBar.snp.makeConstraints { (make) -> Void in
-            make.leading.equalTo(backButton.snp.trailing).offset(5)
+            if showBack {
+                make.leading.equalTo(backButton.snp.trailing).offset(5)
+            }else {
+                make.leading.equalTo(self.snp.leading).offset(5)
+            }
             make.trailing.equalTo(shopButton.snp.leading).offset(-5)
             make.top.equalTo(self.snp.top).offset(20)
             make.bottom.equalTo(self.snp.bottom)

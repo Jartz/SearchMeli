@@ -20,7 +20,6 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
     
     var callback : ((Result?) -> Void)?
     
-    let cellId = "TextCell"
     
     func textDidChange(text: String) {
         viewModel.getProductList(text: text)
@@ -46,7 +45,7 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
         self.view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.register(ProductCard.self, forCellReuseIdentifier: "productCard")
         tableView.snp.makeConstraints { make in
             make.bottom.leading.trailing.equalToSuperview()
             make.top.equalTo(searchView.snp.bottom)
@@ -88,9 +87,10 @@ extension ProductListVC : UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
-        let row = indexPath.row
-        cell.textLabel?.text = self.listProd[row].title
+        let cell = tableView.dequeueReusableCell(withIdentifier: "productCard", for: indexPath) as! ProductCard
+        cell.product = self.listProd[indexPath.row]
+        
+        
         return cell
     }
     
