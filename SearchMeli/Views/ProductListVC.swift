@@ -7,12 +7,18 @@
 
 import UIKit
 import Combine
+import MapKit
 
 
 class ProductListVC: UIViewController, NavigationSearchDelegate {
 
     private var viewModel = SearchVM()
     private var canellables: Set<AnyCancellable> = []
+    var tableView: UITableView = UITableView()
+    var searchView = NavigationSearch()
+    var listProd: [Result] = []
+    
+    let cellId = "TextCell"
     
     func textDidChange(text: String) {
         viewModel.getProductList(text: text)
@@ -27,17 +33,31 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .yellow
-
         viewModel = SearchVM()
-       let data = NavigationSearch(vc: self)
-        data.delegate = self
+        searchView = NavigationSearch(vc: self)
+        searchView.delegate = self
         binding()
-       
+        setup()
+    }
+    
+    func setup(){
+        self.view.addSubview(tableView)
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: cellId)
+        tableView.snp.makeConstraints { make in
+            make.bottom.leading.trailing.equalToSuperview()
+            make.top.equalTo(searchView.snp.bottom)
+        }
     }
     
     func binding(){
         viewModel.$dataSource.sink { data in
-            print(data)
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.listProd = data?.results ?? []
+                strongSelf.tableView.reloadData()
+            }
         }.store(in: &canellables)
     }
     
@@ -53,7 +73,22 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    }
+
+}
+
+
+extension ProductListVC : UITableViewDelegate, UITableViewDataSource  {
+    
+    // MARK: - TableView
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.listProd.count
     }
     
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath)
+        let row = indexPath.row
+        cell.textLabel?.text = self.listProd[row].title
+        return cell
+    }
 }

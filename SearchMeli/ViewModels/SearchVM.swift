@@ -20,27 +20,10 @@ class SearchVM : ObservableObject {
             return
         }
         
-//        guard let url2 = URL(string: "https://api.mercadolibre.com/sites/MCO/search?q=Camas") else { return }
-//
-//        let task = URLSession.shared.dataTask(with: url2, completionHandler: { (data, response, error) in
-//            guard let data = data else { return }
-//            //  print(String(data: data, encoding: .utf8)!)
-//            do{
-//            let data = try JSONDecoder().decode(ProductResponse.self, from: data)
-//                self.dataSource = data
-//            } catch(let error){
-//                print(error)
-//            }
-//
-//
-//        })
-//        task.resume()
-        
 
         let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
         service.getProductList(text: text)
             .sink { (completion) in
-                print("sdfsdfsdf")
                 switch completion {
                 case .failure(let error):
                     print("oops got an error \(error.localizedDescription)")

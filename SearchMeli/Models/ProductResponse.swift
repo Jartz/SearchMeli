@@ -82,7 +82,7 @@ struct Result: Codable {
     let price: Int?
     let prices: Prices?
     let salePrice: String?
-    let currencyID: CurrencyID?
+    let currencyID: String?
     let availableQuantity, soldQuantity: Int?
     let buyingMode: BuyingMode?
     let listingTypeID: ListingTypeID?
@@ -167,13 +167,13 @@ enum StateName: String, Codable {
 
 // MARK: - Attribute
 struct Attribute: Codable {
-    let id: ID
-    let name: Name
+    let id: String?
+    let name: String?
     let valueStruct: Struct?
     let values: [AttributeValue]
-    let attributeGroupID: AttributeGroupID
+    let attributeGroupID: String?
     let valueID, valueName: String?
-    let attributeGroupName: AttributeGroupName
+    let attributeGroupName: String?
     let source: Int?
 
     enum CodingKeys: String, CodingKey {
@@ -196,24 +196,7 @@ enum AttributeGroupName: String, Codable {
     case otros = "Otros"
 }
 
-enum ID: String, Codable {
-    case blanketWeight = "BLANKET_WEIGHT"
-    case brand = "BRAND"
-    case itemCondition = "ITEM_CONDITION"
-    case length = "LENGTH"
-    case model = "MODEL"
-    case unitsPerPackage = "UNITS_PER_PACKAGE"
-    case weight = "WEIGHT"
-}
 
-enum Name: String, Codable {
-    case condiciónDelÍtem = "Condición del ítem"
-    case largo = "Largo"
-    case marca = "Marca"
-    case modelo = "Modelo"
-    case peso = "Peso"
-    case unidadesPorEnvase = "Unidades por envase"
-}
 
 // MARK: - Struct
 struct Struct: Codable {
@@ -242,9 +225,7 @@ enum Condition: String, Codable {
     case new = "new"
 }
 
-enum CurrencyID: String, Codable {
-    case cop = "COP"
-}
+
 
 // MARK: - DifferentialPricing
 struct DifferentialPricing: Codable {
@@ -256,7 +237,7 @@ struct Installments: Codable {
     let quantity: Int?
     let amount: Double?
     let rate: Int?
-    let currencyID: CurrencyID
+    let currencyID: String?
 
     enum CodingKeys: String, CodingKey {
         case quantity, amount, rate
@@ -288,7 +269,7 @@ struct Prices: Codable {
 
 // MARK: - Presentation
 struct Presentation: Codable {
-    let displayCurrency: CurrencyID
+    let displayCurrency: String?
 
     enum CodingKeys: String, CodingKey {
         case displayCurrency = "display_currency"
@@ -299,9 +280,9 @@ struct Presentation: Codable {
 struct Price: Codable {
     let id: String?
     let type: PriceType
-    let amount: Int?
+    let amount: Amount?
     let regularAmount: Int?
-    let currencyID: CurrencyID
+    let currencyID: String?
 //    let lastUpdated: Date?
     let conditions: Conditions
     let exchangeRateContext: String?
@@ -318,9 +299,33 @@ struct Price: Codable {
     }
 }
 
+@propertyWrapper struct Flexible<T: FlexibleDecodable>: Decodable {
+    var wrappedValue: T
+    
+    init(from decoder: Decoder) throws {
+        wrappedValue = try T(container: decoder.singleValueContainer())
+    }
+}
+
+protocol FlexibleDecodable {
+    init(container: SingleValueDecodingContainer) throws
+}
+
+extension Int: FlexibleDecodable {
+    init(container: SingleValueDecodingContainer) throws {
+        if let int = try? container.decode(Int.self) {
+            self = int
+        } else if let string = try? container.decode(String.self), let int = Int(string) {
+            self = int
+        } else {
+            throw DecodingError.dataCorrupted(.init(codingPath: container.codingPath, debugDescription: "Invalid int value"))
+        }
+    }
+}
+
 // MARK: - Conditions
 struct Conditions: Codable {
-    let contextRestrictions: [ContextRestriction]
+    let contextRestrictions: [String?]
 //    let startTime,
 //let endTime: Date?
     let eligible: Bool?
@@ -333,16 +338,13 @@ struct Conditions: Codable {
     }
 }
 
-enum ContextRestriction: String, Codable {
-    case channelMarketplace = "channel_marketplace"
-    case channelMshops = "channel_mshops"
-}
+
 
 
 
 // MARK: - Metadata
 struct Metadata: Codable {
-    let campaignID: CampaignID?
+    let campaignID: String?
     let promotionID: String?
     let promotionType: String?
 
@@ -352,14 +354,6 @@ struct Metadata: Codable {
         case promotionType = "promotion_type"
     }
 }
-
-enum CampaignID: String, Codable {
-    case mco2298 = "MCO2298"
-    case mco3990 = "MCO3990"
-    case mco4829 = "MCO4829"
-}
-
-
 
 enum PriceType: String, Codable {
     case promotion = "promotion"
@@ -371,8 +365,8 @@ struct ReferencePrice: Codable {
     let id: String?
     let type: String?
     let conditions: Conditions
-    let amount: Int?
-    let currencyID: CurrencyID
+    let amount: Amount?
+    let currencyID: String?
     let exchangeRateContext: String?
 //    let tags: Any
 //    let lastUpdated: Date?
@@ -383,6 +377,34 @@ struct ReferencePrice: Codable {
         case exchangeRateContext = "exchange_rate_context"
 //        case tags
 //        case lastUpdated = "last_updated"
+    }
+}
+
+enum Amount: Codable {
+    case integer(Int)
+    case double(Double)
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let x = try? container.decode(Int.self) {
+            self = .integer(x)
+            return
+        }
+        if let x = try? container.decode(Double.self) {
+            self = .double(x)
+            return
+        }
+        throw DecodingError.typeMismatch(Amount.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Amount"))
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .integer(let x):
+            try container.encode(x)
+        case .double(let x):
+            try container.encode(x)
+        }
     }
 }
 
