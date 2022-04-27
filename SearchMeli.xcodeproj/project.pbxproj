@@ -42,6 +42,8 @@
 		5593269628199B130026173B /* proximanova-light.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 5593269228199B130026173B /* proximanova-light.woff2 */; };
 		5593269728199B130026173B /* proximanova-regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 5593269328199B130026173B /* proximanova-regular.woff2 */; };
 		5593269828199B130026173B /* navigation.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 5593269428199B130026173B /* navigation.woff2 */; };
+		5593269A28199CBE0026173B /* ProductSearchedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593269928199CBE0026173B /* ProductSearchedVC.swift */; };
+		5593269C2819A0A70026173B /* SearchedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593269B2819A0A70026173B /* SearchedCard.swift */; };
 		55D7D97B28185282005D8FBC /* NavigationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D97A28185282005D8FBC /* NavigationSearch.swift */; };
 		55D7D981281852C7005D8FBC /* ButtonMeli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D980281852C7005D8FBC /* ButtonMeli.swift */; };
 		55FC525B28184C6400F5E3F2 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC525A28184C6400F5E3F2 /* TabBarVC.swift */; };
@@ -104,6 +106,8 @@
 		5593269228199B130026173B /* proximanova-light.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "proximanova-light.woff2"; sourceTree = "<group>"; };
 		5593269328199B130026173B /* proximanova-regular.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "proximanova-regular.woff2"; sourceTree = "<group>"; };
 		5593269428199B130026173B /* navigation.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = navigation.woff2; sourceTree = "<group>"; };
+		5593269928199CBE0026173B /* ProductSearchedVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductSearchedVC.swift; sourceTree = "<group>"; };
+		5593269B2819A0A70026173B /* SearchedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedCard.swift; sourceTree = "<group>"; };
 		55D7D97A28185282005D8FBC /* NavigationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSearch.swift; sourceTree = "<group>"; };
 		55D7D980281852C7005D8FBC /* ButtonMeli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMeli.swift; sourceTree = "<group>"; };
 		55FC525A28184C6400F5E3F2 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -170,6 +174,7 @@
 		556F659E2817740D006AC890 /* SearchMeli */ = {
 			isa = PBXGroup;
 			children = (
+				55A469492819B960004D4878 /* CoreData */,
 				5593269028199B080026173B /* font */,
 				556F65D3281774D3006AC890 /* Views */,
 				556F65D2281774CD006AC890 /* Models */,
@@ -250,6 +255,7 @@
 				55FC525A28184C6400F5E3F2 /* TabBarVC.swift */,
 				55FC525C28184D1500F5E3F2 /* FavoriteVC.swift */,
 				5593267C2818C6BB0026173B /* ProductDetailVC.swift */,
+				5593269928199CBE0026173B /* ProductSearchedVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -282,6 +288,7 @@
 			isa = PBXGroup;
 			children = (
 				5593268E281903F30026173B /* ProductCard.swift */,
+				5593269B2819A0A70026173B /* SearchedCard.swift */,
 			);
 			path = Card;
 			sourceTree = "<group>";
@@ -295,6 +302,13 @@
 				5593269128199B130026173B /* proximanova-semibold.woff2 */,
 			);
 			path = font;
+			sourceTree = "<group>";
+		};
+		55A469492819B960004D4878 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 		55D7D97E281852A3005D8FBC /* Navigation */ = {
@@ -597,6 +611,7 @@
 				5593266B28187A6D0026173B /* NativeRequestable.swift in Sources */,
 				556F65A02817740D006AC890 /* AppDelegate.swift in Sources */,
 				5593268F281903F30026173B /* ProductCard.swift in Sources */,
+				5593269A28199CBE0026173B /* ProductSearchedVC.swift in Sources */,
 				55FC525D28184D1500F5E3F2 /* FavoriteVC.swift in Sources */,
 				5593267928187D0C0026173B /* ProductResponse.swift in Sources */,
 				55D7D981281852C7005D8FBC /* ButtonMeli.swift in Sources */,
@@ -604,6 +619,7 @@
 				559326842818F7390026173B /* CarouselCell.swift in Sources */,
 				5593267728187CB30026173B /* Requestable.swift in Sources */,
 				5593268C2818FDC90026173B /* ButtonCell.swift in Sources */,
+				5593269C2819A0A70026173B /* SearchedCard.swift in Sources */,
 				556F65A22817740D006AC890 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

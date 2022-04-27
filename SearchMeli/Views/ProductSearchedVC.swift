@@ -1,39 +1,44 @@
 //
-//  ProductListVC.swift
+//  ProductSearchedVC.swift
 //  SearchMeli
 //
-//  Created by Julian Ramos on 4/26/22.
+//  Created by Julian Ramos on 4/27/22.
 //
+
 
 import UIKit
 import Combine
 import MapKit
 
 
-class ProductListVC: UIViewController, NavigationSearchDelegate {
+class ProductSearchedVC: UIViewController, NavigationSearchDelegate {
 
     private var viewModel = SearchVM()
     private var canellables: Set<AnyCancellable> = []
     var tableView: UITableView = UITableView()
     var searchView = NavigationSearch()
     var listProd: [Result] = []
-   
+    
+    var callback : (([Result]) -> Void)?
+    
+    
     func textDidChange(text: String) {
         viewModel.getProductList(text: text)
     }
     
     func actionBackButton() {
         print("actionBackButton")
-        self.navigationController?.popViewController(animated: true)
+        self.dismiss(animated: false, completion: nil)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .yellow
+        self.view.backgroundColor = .white
         viewModel = SearchVM()
         searchView = NavigationSearch(vc: self)
         searchView.delegate = self
+        binding()
         setup()
     }
     
@@ -41,14 +46,26 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
         self.view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.register(ProductCard.self, forCellReuseIdentifier: "productCard")
+        tableView.backgroundColor = .clear
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
+        tableView.register(SearchedCard.self, forCellReuseIdentifier: "searchedCard")
         tableView.snp.makeConstraints { make in
-            make.bottom.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.bottom.trailing.equalToSuperview().offset(-16)
             make.top.equalTo(searchView.snp.bottom)
         }
     }
     
-   
+    func binding(){
+        viewModel.$dataSource.sink { data in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.listProd = data?.results ?? []
+                strongSelf.tableView.reloadData()
+            }
+        }.store(in: &canellables)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -67,7 +84,7 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
 }
 
 
-extension ProductListVC : UITableViewDelegate, UITableViewDataSource  {
+extension ProductSearchedVC : UITableViewDelegate, UITableViewDataSource  {
     
     // MARK: - TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -75,7 +92,7 @@ extension ProductListVC : UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "productCard", for: indexPath) as! ProductCard
+        let cell = tableView.dequeueReusableCell(withIdentifier: "searchedCard", for: indexPath) as! SearchedCard
         cell.product = self.listProd[indexPath.row]
         
         
@@ -83,8 +100,13 @@ extension ProductListVC : UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let vc = ProducDetailVC()
-        vc.result = self.listProd[indexPath.row]
-        self.navigationController?.pushViewController(vc, animated: true)
+        self.dismiss(animated: false) {
+            self.dismiss(animated: false) {
+                if let cb = self.callback {
+                    cb(self.listProd)
+                }
+            }
+            
+        }
     }
 }

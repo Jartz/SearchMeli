@@ -143,11 +143,11 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
     
     func goToScreenPresenting(){
         DispatchQueue.main.async {
-            let vcPresenter = ProductListVC()
+            let vcPresenter = ProductSearchedVC()
             vcPresenter.modalPresentationStyle = .fullScreen
-            vcPresenter.callback = { result in
-                    let vcDetail =  ProducDetailVC()
-                    vcDetail.result = result
+            vcPresenter.callback = { results in
+                    let vcDetail =  ProductListVC()
+                    vcDetail.listProd = results
                 self.navigationController?.pushViewController(vcDetail, animated: true)
             }
             self.navigationController?.present(vcPresenter, animated: false, completion: nil)
