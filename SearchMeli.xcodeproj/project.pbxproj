@@ -38,6 +38,10 @@
 		5593268A2818FD270026173B /* QuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559326892818FD270026173B /* QuantityCell.swift */; };
 		5593268C2818FDC90026173B /* ButtonCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593268B2818FDC90026173B /* ButtonCell.swift */; };
 		5593268F281903F30026173B /* ProductCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593268E281903F30026173B /* ProductCard.swift */; };
+		5593269528199B130026173B /* proximanova-semibold.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 5593269128199B130026173B /* proximanova-semibold.woff2 */; };
+		5593269628199B130026173B /* proximanova-light.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 5593269228199B130026173B /* proximanova-light.woff2 */; };
+		5593269728199B130026173B /* proximanova-regular.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 5593269328199B130026173B /* proximanova-regular.woff2 */; };
+		5593269828199B130026173B /* navigation.woff2 in Resources */ = {isa = PBXBuildFile; fileRef = 5593269428199B130026173B /* navigation.woff2 */; };
 		55D7D97B28185282005D8FBC /* NavigationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D97A28185282005D8FBC /* NavigationSearch.swift */; };
 		55D7D981281852C7005D8FBC /* ButtonMeli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D980281852C7005D8FBC /* ButtonMeli.swift */; };
 		55FC525B28184C6400F5E3F2 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC525A28184C6400F5E3F2 /* TabBarVC.swift */; };
@@ -96,6 +100,10 @@
 		559326892818FD270026173B /* QuantityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuantityCell.swift; sourceTree = "<group>"; };
 		5593268B2818FDC90026173B /* ButtonCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonCell.swift; sourceTree = "<group>"; };
 		5593268E281903F30026173B /* ProductCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProductCard.swift; sourceTree = "<group>"; };
+		5593269128199B130026173B /* proximanova-semibold.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "proximanova-semibold.woff2"; sourceTree = "<group>"; };
+		5593269228199B130026173B /* proximanova-light.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "proximanova-light.woff2"; sourceTree = "<group>"; };
+		5593269328199B130026173B /* proximanova-regular.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = "proximanova-regular.woff2"; sourceTree = "<group>"; };
+		5593269428199B130026173B /* navigation.woff2 */ = {isa = PBXFileReference; lastKnownFileType = file; path = navigation.woff2; sourceTree = "<group>"; };
 		55D7D97A28185282005D8FBC /* NavigationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSearch.swift; sourceTree = "<group>"; };
 		55D7D980281852C7005D8FBC /* ButtonMeli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMeli.swift; sourceTree = "<group>"; };
 		55FC525A28184C6400F5E3F2 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -162,6 +170,7 @@
 		556F659E2817740D006AC890 /* SearchMeli */ = {
 			isa = PBXGroup;
 			children = (
+				5593269028199B080026173B /* font */,
 				556F65D3281774D3006AC890 /* Views */,
 				556F65D2281774CD006AC890 /* Models */,
 				556F65D1281774C4006AC890 /* Services */,
@@ -275,6 +284,17 @@
 				5593268E281903F30026173B /* ProductCard.swift */,
 			);
 			path = Card;
+			sourceTree = "<group>";
+		};
+		5593269028199B080026173B /* font */ = {
+			isa = PBXGroup;
+			children = (
+				5593269428199B130026173B /* navigation.woff2 */,
+				5593269228199B130026173B /* proximanova-light.woff2 */,
+				5593269328199B130026173B /* proximanova-regular.woff2 */,
+				5593269128199B130026173B /* proximanova-semibold.woff2 */,
+			);
+			path = font;
 			sourceTree = "<group>";
 		};
 		55D7D97E281852A3005D8FBC /* Navigation */ = {
@@ -425,8 +445,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5593269528199B130026173B /* proximanova-semibold.woff2 in Resources */,
 				556F65AC2817740F006AC890 /* LaunchScreen.storyboard in Resources */,
+				5593269728199B130026173B /* proximanova-regular.woff2 in Resources */,
+				5593269828199B130026173B /* navigation.woff2 in Resources */,
 				556F65A92817740F006AC890 /* Assets.xcassets in Resources */,
+				5593269628199B130026173B /* proximanova-light.woff2 in Resources */,
 				556F65A72817740D006AC890 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

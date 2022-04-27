@@ -20,6 +20,8 @@ class ProducDetailVC : UIViewController, NavigationSearchDelegate {
     var viewModel = SearchVM()
     var searchHeader = NavigationSearch()
     var result: Result!
+    var productDetail: ProductModel!
+    var pagerView: FSPagerView!
     
     
     var tableView: UITableView = UITableView()
@@ -29,17 +31,29 @@ class ProducDetailVC : UIViewController, NavigationSearchDelegate {
         super.viewDidLoad()
         searchHeader = NavigationSearch(vc: self,showOnlyIcon: true)
         searchHeader.delegate = self
-        self.view.backgroundColor = .red
+        self.view.backgroundColor = .white
         binding()
         setup()
         if let id = result.id {
+            print(id)
             viewModel.getProduct(id: id)
         }
     }
     
     func binding(){
-        viewModel.$product.sink { _ in
-            
+        viewModel.$product.sink { product in
+            DispatchQueue.main.async {  [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.productDetail = product
+                
+                strongSelf.pagerView = FSPagerView(frame:CGRect(x: 0, y: 0, width: strongSelf.view.frame.width, height: 300))
+                strongSelf.pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+                strongSelf.pagerView.dataSource = self
+                strongSelf.pagerView.delegate = self
+                
+                strongSelf.tableView.reloadData()
+            }
+           
         }.store(in: &canellables)
     }
     
@@ -47,6 +61,9 @@ class ProducDetailVC : UIViewController, NavigationSearchDelegate {
         self.view.addSubview(tableView)
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = UITableViewCell.SeparatorStyle.none
         tableView.register(TitleInfoCell.self, forCellReuseIdentifier: "titleInfoCell")
         tableView.register(CarouselCell.self, forCellReuseIdentifier: "carouselCell")
         tableView.register(ColorCell.self, forCellReuseIdentifier: "colorCell")
@@ -54,9 +71,12 @@ class ProducDetailVC : UIViewController, NavigationSearchDelegate {
         tableView.register(QuantityCell.self, forCellReuseIdentifier: "quantityCell")
         tableView.register(ButtonCell.self, forCellReuseIdentifier: "buttonCell")
         tableView.snp.makeConstraints { make in
-            make.bottom.leading.trailing.equalToSuperview()
+            make.leading.equalToSuperview().offset(16)
+            make.trailing.equalToSuperview().offset(-16)
+            make.bottom.equalToSuperview()
             make.top.equalTo(searchHeader.snp.bottom)
         }
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -84,24 +104,50 @@ extension ProducDetailVC : UITableViewDelegate, UITableViewDataSource  {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
+      
         switch indexPath.row {
         case 0:
-            cell = tableView.dequeueReusableCell(withIdentifier: "titleInfoCell", for: indexPath) as! TitleInfoCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "titleInfoCell", for: indexPath) as! TitleInfoCell
+            cell.product = self.result
+            return cell
         case 1:
-            cell = tableView.dequeueReusableCell(withIdentifier: "carouselCell", for: indexPath) as! CarouselCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "carouselCell", for: indexPath) as! CarouselCell
+            cell.product = self.productDetail
+            cell.carrousel(pagerView)
+            return cell
         case 2:
-            cell = tableView.dequeueReusableCell(withIdentifier: "colorCell", for: indexPath) as! ColorCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "colorCell", for: indexPath) as! ColorCell
+            // cell.product = self.result
+            return cell
         case 3:
-            cell = tableView.dequeueReusableCell(withIdentifier: "priceCell", for: indexPath) as! PriceCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "priceCell", for: indexPath) as! PriceCell
+            cell.product = self.result
+            return cell
         case 4:
-            cell = tableView.dequeueReusableCell(withIdentifier: "quantityCell", for: indexPath) as! QuantityCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "quantityCell", for: indexPath) as! QuantityCell
+            //cell.product = self.result
+            return cell
         case 5:
-            cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath) as! ButtonCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath) as! ButtonCell
+            //cell.product = self.result
+            return cell
         default:
             return UITableViewCell()
         }
-        return cell
+       
     }
     
+}
+
+extension ProducDetailVC : FSPagerViewDelegate, FSPagerViewDataSource {
+    func numberOfItems(in pagerView: FSPagerView) -> Int {
+        return self.productDetail?.pictures.count ?? 0
+    }
+    
+    func pagerView(_ pagerView: FSPagerView, cellForItemAt index: Int) -> FSPagerViewCell {
+        let cell = pagerView.dequeueReusableCell(withReuseIdentifier: "cell", at: index)
+        let url = URL(string: self.productDetail.pictures[index].url )
+        cell.imageView?.kf.setImage(with: url)
+        return cell
+    }
 }

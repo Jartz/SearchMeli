@@ -12,22 +12,26 @@ import UIKit
 
 class PriceCell : UITableViewCell  {
     
-    var product : ProductModel? {
+    var product : Result? {
         didSet {
-//            productImage.image = product?.productImage
-//            productNameLabel.text = product?.productName
-//            productDescriptionLabel.text = product?.productDesc
+            priceLabel.text = "$ "+String(product?.price ?? 0)
+            coutasLabel.text = "Hasta 48 coutas"
+            moreInformationLabel.text = "Más información"
+            disocuntLabel.text = "51% OFF"
         }
     }
     
     var sectionPrice: UIView!
+    var priceLabel: UILabel!
+    var disocuntLabel: UILabel!
+    var coutasLabel: UILabel!
+    var moreInformationLabel: UILabel!
     
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        self.backgroundColor = .green
+        self.backgroundColor = .clear
         priceSection()
-        
     }
     
    
@@ -36,23 +40,29 @@ class PriceCell : UITableViewCell  {
         
         sectionPrice = UIView()
         sectionPrice.translatesAutoresizingMaskIntoConstraints = false
-        sectionPrice.backgroundColor = .red
         self.addSubview(sectionPrice)
         
-        let text1 = UILabel()
-        text1.text = "$ 723.900"
-        text1.translatesAutoresizingMaskIntoConstraints = false
-        sectionPrice.addSubview(text1)
+        priceLabel = UILabel()
+        priceLabel.translatesAutoresizingMaskIntoConstraints = false
+        priceLabel.font = UIFont.systemFont(ofSize: 32)
+        sectionPrice.addSubview(priceLabel)
         
-        let text2 = UILabel()
-        text2.text = "Hasta 48 coutas"
-        text2.translatesAutoresizingMaskIntoConstraints = false
-        sectionPrice.addSubview(text2)
+        disocuntLabel = UILabel()
+        disocuntLabel.translatesAutoresizingMaskIntoConstraints = false
+        disocuntLabel.font = UIFont.systemFont(ofSize: 16)
+        disocuntLabel.textColor = UIColor(named: "colorGreenMeli")
+        sectionPrice.addSubview(disocuntLabel)
         
-        let text3 = UILabel()
-        text3.text = "Mas información"
-        text3.translatesAutoresizingMaskIntoConstraints = false
-        sectionPrice.addSubview(text3)
+        coutasLabel = UILabel()
+        coutasLabel.translatesAutoresizingMaskIntoConstraints = false
+        coutasLabel.font = UIFont.systemFont(ofSize: 14)
+        sectionPrice.addSubview(coutasLabel)
+        
+        moreInformationLabel = UILabel()
+        moreInformationLabel.translatesAutoresizingMaskIntoConstraints = false
+        moreInformationLabel.textColor = UIColor(named: "colorBlueMeli")
+        moreInformationLabel.font = UIFont.systemFont(ofSize: 14)
+        sectionPrice.addSubview(moreInformationLabel)
         
         sectionPrice.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top)
@@ -62,23 +72,27 @@ class PriceCell : UITableViewCell  {
         }
 
         
-        text1.snp.makeConstraints { make in
+        priceLabel.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top)
             make.leading.equalTo(sectionPrice.snp.leading)
+        }
+        
+        disocuntLabel.snp.makeConstraints { make in
+            make.top.equalTo(self.snp.top)
+            make.leading.equalTo(priceLabel.snp.trailing).offset(20)
+            make.centerY.equalTo(priceLabel.snp.centerY)
+        }
+        
+        coutasLabel.snp.makeConstraints { make in
+            make.top.equalTo(priceLabel.snp.bottom).offset(15)
+            make.leading.equalTo(sectionPrice.snp.leading).offset(20)
             make.trailing.equalTo(sectionPrice.snp.trailing)
             make.centerX.equalTo(self.snp.centerX)
         }
         
-        text2.snp.makeConstraints { make in
-            make.top.equalTo(text1.snp.bottom)
-            make.leading.equalTo(sectionPrice.snp.leading)
-            make.trailing.equalTo(sectionPrice.snp.trailing)
-            make.centerX.equalTo(self.snp.centerX)
-        }
-        
-        text3.snp.makeConstraints { make in
-            make.top.equalTo(text2.snp.bottom)
-            make.leading.equalTo(sectionPrice.snp.leading)
+        moreInformationLabel.snp.makeConstraints { make in
+            make.top.equalTo(coutasLabel.snp.bottom)
+            make.leading.equalTo(sectionPrice.snp.leading).offset(20)
             make.trailing.equalTo(sectionPrice.snp.trailing)
             make.centerX.equalTo(self.snp.centerX)
             make.bottom.equalTo(sectionPrice.snp.bottom)

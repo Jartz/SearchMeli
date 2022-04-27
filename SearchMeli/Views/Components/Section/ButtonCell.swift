@@ -23,6 +23,7 @@ class ButtonCell : UITableViewCell  {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        self.backgroundColor = .clear
         buttonBuy()
     }
     
@@ -33,13 +34,15 @@ class ButtonCell : UITableViewCell  {
         let button = UIButton()
         button.setTitle("Comprar Ahora", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = UIColor(named: "colorBlueMeli")
+        button.layer.cornerRadius = 6
         self.addSubview(button)
         button.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top)
+            make.top.equalTo(self.snp.top).offset(20)
             make.trailing.equalTo(self.snp.trailing)
             make.leading.equalTo(self.snp.leading)
-            make.height.equalTo(100)
-            make.bottom.equalTo(self.snp.bottom)
+            make.height.equalTo(50)
+            make.bottom.equalTo(self.snp.bottom).offset(-20)
         }
     }
     

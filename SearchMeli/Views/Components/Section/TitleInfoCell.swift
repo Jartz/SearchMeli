@@ -10,65 +10,44 @@ import Foundation
 import UIKit
 class TitleInfoCell : UITableViewCell {
     
-    var product : ProductModel? {
+    var product : Result? {
         didSet {
-//            productImage.image = product?.productImage
-//            productNameLabel.text = product?.productName
-//            productDescriptionLabel.text = product?.productDesc
+            totalSell.text = "Nuevo | 14 vendidos"
+            titleLabel.text = product?.title
         }
     }
     
     var stackView:  UIStackView!
-    
-    private let productNameLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .black
-        lbl.font = UIFont.boldSystemFont(ofSize: 16)
-        lbl.textAlignment = .left
-        return lbl
-    }()
-    
-    
-    private let productDescriptionLabel : UILabel = {
-        let lbl = UILabel()
-        lbl.textColor = .black
-        lbl.font = UIFont.systemFont(ofSize: 16)
-        lbl.textAlignment = .left
-        lbl.numberOfLines = 0
-        return lbl
-    }()
-    
+    var totalSell: UILabel!
+    var titleLabel: UILabel!
 
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
- 
-        self.backgroundColor = .red
-        addSubview(productNameLabel)
-        addSubview(productDescriptionLabel)
-
+        self.backgroundColor = .clear
         headerInfo()
         
     }
     
     func headerInfo(){
-        let text1 = UILabel()
-        text1.text = "Nuevo | 14 vendidos"
+        totalSell = UILabel()
+        totalSell.font = UIFont.systemFont(ofSize: 14)
+        totalSell.textColor = UIColor.gray.withAlphaComponent(0.7)
         
-        let text2 = UILabel()
-        text2.text = "Nuevo2"
+         titleLabel = UILabel()
+       
+        titleLabel.font = UIFont.systemFont(ofSize: 18)
         
         let text3 = UILabel()
-        text3.text = "Nuevo3"
+        text3.text = ""
         
-        stackView = UIStackView(arrangedSubviews: [text1, text2, text3])
+        stackView = UIStackView(arrangedSubviews: [totalSell, titleLabel, text3])
         stackView.axis = .vertical
         stackView.spacing = 5.0
         stackView.alignment = .fill
         stackView.distribution = .fillEqually
         stackView.translatesAutoresizingMaskIntoConstraints = false
-        stackView.backgroundColor = .green
-        
+       
         self.addSubview(stackView)
         stackView.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(10)
