@@ -13,10 +13,9 @@ import Kingfisher
 
 class SearchedCard : UITableViewCell  {
     
-    var product : Result? {
+    var nameSearched : String? {
         didSet {
-            titleLabel.text = product?.title
-        
+            titleLabel.text = nameSearched
         }
     }
     

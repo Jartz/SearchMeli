@@ -10,32 +10,38 @@ import Combine
 import MapKit
 
 
-class ProductListVC: UIViewController, NavigationSearchDelegate {
+class ProductListVC: UIViewController {
 
     private var viewModel = SearchVM()
     private var canellables: Set<AnyCancellable> = []
     var tableView: UITableView = UITableView()
     var searchView = NavigationSearch()
     var listProd: [Result] = []
+    var txtSearched: String = ""
    
-    func textDidChange(text: String) {
-        viewModel.getProductList(text: text)
-    }
-    
-    func actionBackButton() {
-        print("actionBackButton")
-        self.navigationController?.popViewController(animated: true)
-    }
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .yellow
         viewModel = SearchVM()
-        searchView = NavigationSearch(vc: self)
+        searchView = NavigationSearch(vc: self,blockInput: true)
         searchView.delegate = self
         setup()
+        if !txtSearched.isEmpty{
+            viewModel.getProductList(text: txtSearched)
+        }
+        binding()
     }
+    
+    func binding(){
+        viewModel.$dataSource.sink { data in
+            DispatchQueue.main.async { [weak self] in
+                guard let strongSelf = self else { return }
+                strongSelf.listProd = data?.results ?? []
+                strongSelf.tableView.reloadData()
+            }
+        }.store(in: &canellables)
+    }
+    
     
     func setup(){
         self.view.addSubview(tableView)
@@ -64,6 +70,21 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
         super.didReceiveMemoryWarning()
     }
 
+}
+
+extension ProductListVC: NavigationSearchDelegate {
+    func searchBarSearchButtonClicked(text: String) {
+        return
+    }
+    
+    func textDidChange(text: String) {
+        viewModel.getProductList(text: text)
+    }
+    
+    func actionBackButton() {
+        print("actionBackButton")
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 
 

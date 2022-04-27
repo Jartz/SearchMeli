@@ -12,6 +12,7 @@ import SnapKit
 protocol NavigationSearchDelegate {
     func actionBackButton()
     func textDidChange(text:String)
+    func searchBarSearchButtonClicked(text:String)
 }
 
 class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate  {
@@ -141,13 +142,21 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         return true
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        if let text  = searchBar.text {
+            if text.isEmpty { return }
+            self.endEditing(true)
+            delegate?.searchBarSearchButtonClicked(text: text)
+        }
+    }
+    
     func goToScreenPresenting(){
         DispatchQueue.main.async {
             let vcPresenter = ProductSearchedVC()
             vcPresenter.modalPresentationStyle = .fullScreen
             vcPresenter.callback = { results in
                     let vcDetail =  ProductListVC()
-                    vcDetail.listProd = results
+                    vcDetail.txtSearched = results
                 self.navigationController?.pushViewController(vcDetail, animated: true)
             }
             self.navigationController?.present(vcPresenter, animated: false, completion: nil)

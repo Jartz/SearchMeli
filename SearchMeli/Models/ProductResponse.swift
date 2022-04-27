@@ -84,10 +84,10 @@ struct Result: Codable {
     let salePrice: String?
     let currencyID: String?
     let availableQuantity, soldQuantity: Int?
-    let buyingMode: BuyingMode?
-    let listingTypeID: ListingTypeID?
+    let buyingMode: String?
+    let listingTypeID: String?
     let stopTime: String?
-    let condition: Condition?
+    let condition: String?
     let permalink: String?
     let thumbnail: String?
     let thumbnailID: String?
@@ -216,9 +216,7 @@ struct AttributeValue: Codable {
     }
 }
 
-enum BuyingMode: String, Codable {
-    case buyItNow = "buy_it_now"
-}
+
 
 enum Condition: String, Codable {
     case new = "new"
@@ -244,10 +242,7 @@ struct Installments: Codable {
     }
 }
 
-enum ListingTypeID: String, Codable {
-    case goldPro = "gold_pro"
-    case goldSpecial = "gold_special"
-}
+
 
 // MARK: - Prices
 struct Prices: Codable {

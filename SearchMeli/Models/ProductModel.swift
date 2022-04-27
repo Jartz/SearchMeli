@@ -33,7 +33,7 @@ struct ProductModel: Codable {
     let shipping: Shipping
     let internationalDeliveryMode: String
     let sellerAddress: SellerAddress
-    let sellerContact: String?
+//    let sellerContact: String?
     let location: Location
     let coverageAreas: [String]
     let attributes: [Attribute]
@@ -43,12 +43,12 @@ struct ProductModel: Codable {
     let status: String
     let subStatus: [String]
     let tags: [String]
-    let warranty, domainID: String
+    let warranty, domainID: String?
     let parentItemID, differentialPricing: String?
     let dealIDS: [String]
     let automaticRelist: Bool
-    let dateCreated, lastUpdated: String
-    let catalogListing: Bool
+    let dateCreated, lastUpdated: String?
+    let catalogListing: Bool?
     let channels: [String]
 
     enum CodingKeys: String, CodingKey {
@@ -81,7 +81,7 @@ struct ProductModel: Codable {
         case shipping
         case internationalDeliveryMode = "international_delivery_mode"
         case sellerAddress = "seller_address"
-        case sellerContact = "seller_contact"
+//        case sellerContact = "seller_contact"
         case location
         case coverageAreas = "coverage_areas"
         case attributes, warnings

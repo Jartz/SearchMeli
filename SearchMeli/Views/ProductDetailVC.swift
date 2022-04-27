@@ -9,13 +9,8 @@ import UIKit
 import Combine
 import FSPagerView
 
-class ProducDetailVC : UIViewController, NavigationSearchDelegate {
-    func actionBackButton() {
-        self.navigationController?.popViewController(animated: true)
-    }
-    func textDidChange(text: String) {
-        print("")
-    }
+class ProducDetailVC : UIViewController {
+  
     private var canellables: Set<AnyCancellable> = []
     var viewModel = SearchVM()
     var searchHeader = NavigationSearch()
@@ -29,8 +24,9 @@ class ProducDetailVC : UIViewController, NavigationSearchDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        searchHeader = NavigationSearch(vc: self,showOnlyIcon: true)
+        searchHeader = NavigationSearch(vc: self,blockInput: true, showOnlyIcon: true)
         searchHeader.delegate = self
+        self.view.endEditing(true)
         self.view.backgroundColor = .white
         binding()
         setup()
@@ -82,6 +78,7 @@ class ProducDetailVC : UIViewController, NavigationSearchDelegate {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: animated)
+        self.view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -137,6 +134,20 @@ extension ProducDetailVC : UITableViewDelegate, UITableViewDataSource  {
        
     }
     
+}
+
+extension ProducDetailVC : NavigationSearchDelegate {
+    
+    func searchBarSearchButtonClicked(text: String) {
+        return
+    }
+    
+    func actionBackButton() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    func textDidChange(text: String) {
+        print("")
+    }
 }
 
 extension ProducDetailVC : FSPagerViewDelegate, FSPagerViewDataSource {

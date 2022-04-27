@@ -24,7 +24,7 @@ class SearchVM : ObservableObject {
             .sink { (completion) in
                 switch completion {
                 case .failure(let error):
-                    print("oops got an error \(error.localizedDescription)")
+                    print("[Search] error \(error.localizedDescription)")
                 case .finished:
                     break
                 }
