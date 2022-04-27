@@ -14,12 +14,32 @@ class ProductCard : UITableViewCell  {
     
     var product : Result? {
         didSet {
-            titleLabel.text = product?.title
-            
-            guard let url = URL(string:  product?.thumbnail ?? "") else {
-                return
+            if let p = product {
+
+                let value = HelperCurrency.convertCurrency(price: p.price ?? 0)
+                let price = p.price != nil ? (value) : "$0.00"
+                let discounts = p.discounts != nil ? "\(p.discounts!)%" : ""
+                let buyingMode = p.shipping?.freeShipping ?? false  ? "Envio Gratis" : ""
+                let quantity =  p.installments?.quantity != nil ? "\(p.installments!.quantity!)" : ""
+                let amount =  p.installments?.amount != nil ? "\(p.installments!.amount!)" : ""
+                
+                let coutas = quantity.isEmpty ? "" :  "en \(quantity)x $\(amount)"
+                titleLabel.text = p.title
+                priceLabel.text = price
+                discountLabel.text = discounts
+                freeShippingLabel.text = buyingMode
+                nameSeller.text = coutas
+                guard let url = URL(string:  product?.thumbnail ?? "") else {
+                    return
+                }
+                imagenView.kf.setImage(with: url)
+                
+                if(p.shipping?.freeShipping ?? false){
+                    freeShippingLabel.textColor = UIColor(named: "colorGreenMeli")
+                }else {
+                    freeShippingLabel.textColor = UIColor.gray.withAlphaComponent(0.7)
+                }
             }
-            imagenView.kf.setImage(with: url)
         }
     }
     
@@ -28,6 +48,11 @@ class ProductCard : UITableViewCell  {
     
     var titleLabel: UILabel!
     var imagenView: UIImageView!
+    
+    var priceLabel: UILabel!
+    var discountLabel: UILabel!
+    var freeShippingLabel: UILabel!
+    var nameSeller: UILabel!
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -43,48 +68,98 @@ class ProductCard : UITableViewCell  {
     
     func sectionImage(){
         imageContainer = UIView()
-        self.addSubview(imageContainer)
+       
+        imageContainer.backgroundColor = UIColor(named: "colorGrayMeli")
+        imageContainer.layer.cornerRadius = 8
         
         imagenView = UIImageView()
+        imagenView.contentMode = .scaleAspectFit
+        
+        self.addSubview(imageContainer)
         imageContainer.addSubview(imagenView)
-    
+   
         
-        let widthIamge = self.frame.size.width * 0.4
-        let hegihtImage = widthIamge * 0.7
-        
+       
         imageContainer.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top)
+            make.top.equalTo(self.snp.top).offset(10)
             make.leading.equalTo(self.snp.leading)
-            make.width.equalTo(widthIamge)
-            make.height.equalTo(hegihtImage)
-            make.bottom.equalTo(self.snp.bottom)
+            make.width.equalTo(self.frame.size.width * 0.5)
+            make.height.equalTo(self.frame.size.width * 0.5)
+            make.bottom.equalTo(self.snp.bottom).offset(-10)
         }
         
         imagenView.snp.makeConstraints { make in
-            make.top.equalTo(imageContainer.snp.top)
-            make.leading.equalTo(imageContainer.snp.leading)
-            make.trailing.equalTo(imageContainer.snp.trailing)
-            make.bottom.equalTo(imageContainer.snp.bottom)
+            make.top.equalTo(imageContainer.snp.top).offset(10)
+            make.leading.equalTo(imageContainer.snp.leading).offset(10)
+            make.trailing.equalTo(imageContainer.snp.trailing).offset(-10)
+            make.bottom.equalTo(imageContainer.snp.bottom).offset(-10)
         }
         
     }
     
     func sectionInfo(){
         infoContainer = UIView()
-        self.addSubview(infoContainer)
-        infoContainer.snp.makeConstraints { make in
-            make.top.equalTo(self.snp.top)
-            make.leading.equalTo(imageContainer.snp.trailing)
-            make.trailing.equalTo(self.snp.trailing)
-            make.bottom.equalTo(self.snp.bottom)
-        }
-       
         titleLabel = UILabel()
-        titleLabel.numberOfLines = 3
-        titleLabel.font = UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.thin)
+        priceLabel = UILabel()
+        discountLabel = UILabel()
+        freeShippingLabel = UILabel()
+        nameSeller = UILabel()
+        
+        self.addSubview(infoContainer)
         infoContainer.addSubview(titleLabel)
+        infoContainer.addSubview(priceLabel)
+        infoContainer.addSubview(discountLabel)
+        infoContainer.addSubview(freeShippingLabel)
+        infoContainer.addSubview(nameSeller)
+        
+        
+        
+        infoContainer.snp.makeConstraints { make in
+            make.top.equalTo(self.snp.top).offset(20)
+            make.leading.equalTo(imageContainer.snp.trailing).offset(8)
+            make.trailing.equalTo(self.snp.trailing)
+            make.bottom.equalTo(self.snp.bottom).offset(-20)
+        }
+        
+        
+        titleLabel.numberOfLines = 3
+        titleLabel.font = UIFont.systemFont(ofSize: 14)
+    
+        priceLabel.font = UIFont.systemFont(ofSize: 22)
+        
+        discountLabel.font = UIFont.systemFont(ofSize: 14)
+        discountLabel.textColor = UIColor(named: "colorGreenMeli")
+        
+        freeShippingLabel.font = UIFont.systemFont(ofSize: 14)
+        
+        nameSeller.font = UIFont.systemFont(ofSize: 14)
+        
+        
         titleLabel.snp.makeConstraints { make in
             make.top.equalTo(infoContainer.snp.top)
+            make.leading.equalTo(infoContainer.snp.leading)
+            make.trailing.equalTo(infoContainer.snp.trailing)
+            make.height.equalTo(40)
+        }
+        
+        priceLabel.snp.makeConstraints { make in
+            make.top.equalTo(titleLabel.snp.bottom)
+            make.leading.equalTo(infoContainer.snp.leading)
+        }
+        
+        discountLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(priceLabel.snp.centerY)
+            make.leading.equalTo(priceLabel.snp.trailing).offset(8)
+        }
+        
+        freeShippingLabel.snp.makeConstraints { make in
+            make.top.equalTo(priceLabel.snp.bottom)
+            make.leading.equalTo(infoContainer.snp.leading)
+            make.trailing.equalTo(infoContainer.snp.trailing)
+        }
+        
+        nameSeller.snp.makeConstraints { make in
+            make.top.equalTo(freeShippingLabel.snp.bottom)
             make.leading.equalTo(infoContainer.snp.leading)
             make.trailing.equalTo(infoContainer.snp.trailing)
             make.bottom.equalTo(infoContainer.snp.bottom)

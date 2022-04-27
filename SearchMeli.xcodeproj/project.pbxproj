@@ -46,6 +46,7 @@
 		5593269C2819A0A70026173B /* SearchedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5593269B2819A0A70026173B /* SearchedCard.swift */; };
 		55A4694C2819B9CE004D4878 /* Persistent.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 55A4694A2819B9CE004D4878 /* Persistent.xcdatamodeld */; };
 		55A4694E2819BA85004D4878 /* HelperCoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A4694D2819BA85004D4878 /* HelperCoreData.swift */; };
+		55A760DB2819F159002F38D0 /* HelperCurrency.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A760DA2819F159002F38D0 /* HelperCurrency.swift */; };
 		55D7D97B28185282005D8FBC /* NavigationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D97A28185282005D8FBC /* NavigationSearch.swift */; };
 		55D7D981281852C7005D8FBC /* ButtonMeli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D980281852C7005D8FBC /* ButtonMeli.swift */; };
 		55FC525B28184C6400F5E3F2 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC525A28184C6400F5E3F2 /* TabBarVC.swift */; };
@@ -112,6 +113,7 @@
 		5593269B2819A0A70026173B /* SearchedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchedCard.swift; sourceTree = "<group>"; };
 		55A4694B2819B9CE004D4878 /* Persistent.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Persistent.xcdatamodel; sourceTree = "<group>"; };
 		55A4694D2819BA85004D4878 /* HelperCoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperCoreData.swift; sourceTree = "<group>"; };
+		55A760DA2819F159002F38D0 /* HelperCurrency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperCurrency.swift; sourceTree = "<group>"; };
 		55D7D97A28185282005D8FBC /* NavigationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSearch.swift; sourceTree = "<group>"; };
 		55D7D980281852C7005D8FBC /* ButtonMeli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMeli.swift; sourceTree = "<group>"; };
 		55FC525A28184C6400F5E3F2 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 			isa = PBXGroup;
 			children = (
 				55A4694D2819BA85004D4878 /* HelperCoreData.swift */,
+				55A760DA2819F159002F38D0 /* HelperCurrency.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -617,6 +620,7 @@
 				5593267328187B0D0026173B /* MeliService.swift in Sources */,
 				5593266B28187A6D0026173B /* NativeRequestable.swift in Sources */,
 				556F65A02817740D006AC890 /* AppDelegate.swift in Sources */,
+				55A760DB2819F159002F38D0 /* HelperCurrency.swift in Sources */,
 				5593268F281903F30026173B /* ProductCard.swift in Sources */,
 				5593269A28199CBE0026173B /* ProductSearchedVC.swift in Sources */,
 				55FC525D28184D1500F5E3F2 /* FavoriteVC.swift in Sources */,
