@@ -11,16 +11,14 @@ import Combine
 class SearchVM : ObservableObject {
     
     @Published var dataSource: ProductResponse? = nil
+    @Published var product: ProductModel? = nil
     var subscriptions = Set<AnyCancellable>()
     
     func getProductList(text:String){
-     
-        
         if text.count < 3 {
             return
         }
         
-
         let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
         service.getProductList(text: text)
             .sink { (completion) in
@@ -28,17 +26,15 @@ class SearchVM : ObservableObject {
                 case .failure(let error):
                     print("oops got an error \(error.localizedDescription)")
                 case .finished:
-                    print("nothing much to do here")
+                    break
                 }
             } receiveValue: { (response) in
-                print("got my response here \(response)")
                 self.dataSource = response
             }
             .store(in: &subscriptions)
     }
     
-    func getProduct(id:Int){
-        var subscriptions = Set<AnyCancellable>()
+    func getProduct(id:String){
         let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
         service.getProduct(productId: id)
             .sink { (completion) in
@@ -46,10 +42,10 @@ class SearchVM : ObservableObject {
                 case .failure(let error):
                     print("oops got an error \(error.localizedDescription)")
                 case .finished:
-                    print("nothing much to do here")
+                    break
                 }
             } receiveValue: { (response) in
-                print("got my response here \(response)")
+                self.product = response
             }
             .store(in: &subscriptions)
     }

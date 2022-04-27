@@ -19,11 +19,11 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
     
     var delegate: NavigationSearchDelegate?
     
+    var navigationController : UINavigationController?
+    
     var vc : UIViewController!
     var blockInput : Bool = false
-    
 
-    
     var label: UILabel =  {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -73,15 +73,17 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         super.init(frame: frame)
       
     }
-    public convenience init(vc: UIViewController, blockInput:Bool = false) {
+    public convenience init(vc: UIViewController, blockInput:Bool = false, showOnlyIcon:Bool = false, showBack:Bool = true) {
         self.init(frame: .zero)
         self.vc = vc
         self.blockInput = blockInput
-        setupView()
+        setupView(vc: vc, showOnlyIcon: showOnlyIcon,showBack:showBack)
     }
     
     
-    func setupView(){
+    func setupView(vc:UIViewController, showOnlyIcon: Bool, showBack: Bool){
+        
+        self.navigationController = vc.navigationController
         self.vc.view.addSubview(self)
         self.addSubview(backButton)
         self.addSubview(shopButton)
@@ -90,6 +92,8 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         if(!self.blockInput){
             searchBar.becomeFirstResponder()
         }
+        
+        self.searchBar.isHidden = showOnlyIcon
         
         self.searchBar.delegate = self
         self.backgroundColor = UIColor(named: "colorMeli")
@@ -105,6 +109,9 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
             make.height.equalTo(30)
             make.width.equalTo(30)
         }
+        
+    
+        self.backButton.isHidden = !showBack
         
         self.searchBar.snp.makeConstraints { (make) -> Void in
             make.leading.equalTo(backButton.snp.trailing).offset(5)
@@ -135,9 +142,12 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         DispatchQueue.main.async {
             let vcPresenter = ProductListVC()
             vcPresenter.modalPresentationStyle = .fullScreen
-            self.vc.navigationController?.present(vcPresenter, animated: false, completion: {
-                
-            })
+            vcPresenter.callback = { result in
+                    let vcDetail =  ProducDetailVC()
+                    vcDetail.result = result
+                self.navigationController?.pushViewController(vcDetail, animated: true)
+            }
+            self.navigationController?.present(vcPresenter, animated: false, completion: nil)
         }
     }
     

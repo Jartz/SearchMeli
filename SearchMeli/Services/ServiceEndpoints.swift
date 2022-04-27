@@ -11,7 +11,7 @@ enum PurchaseServiceEndpoints {
     
   // organise all the end points here for clarity
     case purchaseProduct(request: PurchaseRequest)
-    case getProduct(productId: Int)
+    case getProduct(productId: String)
     case getProductList(text: String)
     case cancelOrder(orderId: Int)
     
@@ -58,7 +58,7 @@ enum PurchaseServiceEndpoints {
         case .purchaseProduct:
             return "\(baseUrl)/purchase"
         case .getProduct(let productId):
-            return "\(baseUrl)/products/\(productId)"
+            return "\(baseUrl)/items/\(productId)"
         case .cancelOrder(let orderId):
             return "\(baseUrl)/products/\(orderId)/cancel"
         }

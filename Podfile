@@ -8,6 +8,7 @@ target 'SearchMeli' do
   # Pods for SearchMeli
   pod 'SnapKit', '~> 5.6.0'
   pod 'Kingfisher', '~> 7.2'
+  pod 'FSPagerView'
 
   target 'SearchMeliTests' do
     inherit! :search_paths

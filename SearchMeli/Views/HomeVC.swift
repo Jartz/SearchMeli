@@ -33,7 +33,7 @@ class HomeVC: UIViewController {
     }
     
     private func setupView(){
-         let _ = NavigationSearch(vc: self,blockInput: true)
+         let _ = NavigationSearch(vc: self, blockInput: true,showBack: false)
     }
     
     override func didReceiveMemoryWarning() {

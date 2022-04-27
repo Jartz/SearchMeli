@@ -18,6 +18,8 @@ class ProductListVC: UIViewController, NavigationSearchDelegate {
     var searchView = NavigationSearch()
     var listProd: [Result] = []
     
+    var callback : ((Result?) -> Void)?
+    
     let cellId = "TextCell"
     
     func textDidChange(text: String) {
@@ -90,5 +92,16 @@ extension ProductListVC : UITableViewDelegate, UITableViewDataSource  {
         let row = indexPath.row
         cell.textLabel?.text = self.listProd[row].title
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.dismiss(animated: false) {
+            self.dismiss(animated: false) {
+                if let cb = self.callback {
+                    cb(self.listProd[indexPath.row])
+                }
+            }
+            
+        }
     }
 }

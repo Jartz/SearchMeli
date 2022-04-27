@@ -10,7 +10,7 @@ import Foundation
 
 protocol MeliServiceable {
     func purchaseProduct(request: PurchaseRequest) -> AnyPublisher<PurchaseResponse, NetworkError>
-    func getProduct(productId: Int) -> AnyPublisher<ProductResponse, NetworkError>
+    func getProduct(productId: String) -> AnyPublisher<ProductModel, NetworkError>
     func getProductList(text: String) -> AnyPublisher<ProductResponse, NetworkError>
     func cancelOrder(_ orderId: Int) -> AnyPublisher<ProductResponse, NetworkError>
 }
@@ -40,9 +40,9 @@ class MeliService: MeliServiceable {
         return self.networkRequest.request(request)
     }
     
-    func getProduct(productId: Int) -> AnyPublisher<ProductResponse, NetworkError> {
+    func getProduct(productId: String) -> AnyPublisher<ProductModel, NetworkError> {
         let endpoint = PurchaseServiceEndpoints.getProduct(productId: productId)
-        let request = endpoint.createRequest(token: "token",
+        let request = endpoint.createRequest(token: "$ACCESS_TOKEN",
                                              environment: self.environment)
         return self.networkRequest.request(request)
     }

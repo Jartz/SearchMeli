@@ -99,7 +99,6 @@ struct Result: Codable {
     let attributes: [Attribute]
     let originalPrice: Int?
     let categoryID: String?
-    let officialStoreID: Int?
     let domainID: String?
     let catalogProductID: String?
     let tags: [String]
@@ -128,7 +127,7 @@ struct Result: Codable {
         case attributes
         case originalPrice = "original_price"
         case categoryID = "category_id"
-        case officialStoreID = "official_store_id"
+       
         case domainID = "domain_id"
         case catalogProductID = "catalog_product_id"
         case tags
@@ -427,7 +426,8 @@ struct Seller: Codable {
 
 // MARK: - SellerAddress
 struct SellerAddress: Codable {
-    let id, comment, addressLine, zipCode: String
+    let id: StringOrInt?
+    let comment, addressLine, zipCode: String?
     let country, state, city: Sort
     let latitude, longitude: String?
 
@@ -436,6 +436,34 @@ struct SellerAddress: Codable {
         case addressLine = "address_line"
         case zipCode = "zip_code"
         case country, state, city, latitude, longitude
+    }
+}
+
+enum StringOrInt: Codable {
+    case integer(Int)
+    case string(String)
+
+    init(from decoder: Decoder) throws {
+        let container = try decoder.singleValueContainer()
+        if let x = try? container.decode(Int.self) {
+            self = .integer(x)
+            return
+        }
+        if let x = try? container.decode(String.self) {
+            self = .string(x)
+            return
+        }
+        throw DecodingError.typeMismatch(Amount.self, DecodingError.Context(codingPath: decoder.codingPath, debugDescription: "Wrong type for Amount"))
+    }
+
+    func encode(to encoder: Encoder) throws {
+        var container = encoder.singleValueContainer()
+        switch self {
+        case .integer(let x):
+            try container.encode(x)
+        case .string(let x):
+            try container.encode(x)
+        }
     }
 }
 
