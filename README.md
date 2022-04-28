@@ -21,9 +21,11 @@ This project contains a test for MELI with MVVM architecture with all required p
 - Screen last searched
 - Screen product list
 - Screen product detail
-- Icon & Tenmaple similar MELI
-- Core date
+- Icon & Template similar MELI
+- Core date (list searched)
 - Carrousel
+- Lost connection.
+- Spinners
 
 
 ## Unit test
