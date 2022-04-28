@@ -30,18 +30,22 @@ class InitialCell: UITableViewCell {
     func setupView(){
         
         let title = UILabel()
-        title.text = "!Crea una cuenta y mejora tu experiencia"
+        title.text = "!Crea una cuenta y mejora tu experiencia!"
        
         let button = UIButton()
         button.setTitle("Crear cuenta", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(named: "colorBlueMeli")
+        button.isUserInteractionEnabled = true
+        button.addTarget(self, action:  #selector(activeAlert), for: .touchUpInside)
         button.layer.cornerRadius = 6
        
         let buttonIn = UIButton()
         buttonIn.setTitle("Ingresar a mi cuenta", for: .normal)
         buttonIn.translatesAutoresizingMaskIntoConstraints = false
         buttonIn.setTitleColor( UIColor(named: "colorBlueMeli"), for: .normal)
+        buttonIn.isUserInteractionEnabled = true
+        buttonIn.addTarget(self, action:  #selector(activeAlert), for: .touchUpInside)
         buttonIn.layer.cornerRadius = 6
         
         let container = UIView()
@@ -69,6 +73,11 @@ class InitialCell: UITableViewCell {
             make.trailing.equalTo(self.snp.trailing).offset(-10)
             make.leading.equalTo(self.snp.leading).offset(10)
         }
+    }
+    
+    
+    @objc func activeAlert(){
+        HelperUI.showAlert(vc:self.vc)
     }
     
     

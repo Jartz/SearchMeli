@@ -51,6 +51,7 @@
 		55A760DF281A074F002F38D0 /* AdsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A760DE281A074F002F38D0 /* AdsCell.swift */; };
 		55D7D97B28185282005D8FBC /* NavigationSearch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D97A28185282005D8FBC /* NavigationSearch.swift */; };
 		55D7D981281852C7005D8FBC /* ButtonMeli.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55D7D980281852C7005D8FBC /* ButtonMeli.swift */; };
+		55F9C080281A37D90098455B /* HelperUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9C07F281A37D90098455B /* HelperUI.swift */; };
 		55FC525B28184C6400F5E3F2 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC525A28184C6400F5E3F2 /* TabBarVC.swift */; };
 		55FC525D28184D1500F5E3F2 /* FavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC525C28184D1500F5E3F2 /* FavoriteVC.swift */; };
 /* End PBXBuildFile section */
@@ -120,6 +121,7 @@
 		55A760DE281A074F002F38D0 /* AdsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AdsCell.swift; sourceTree = "<group>"; };
 		55D7D97A28185282005D8FBC /* NavigationSearch.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationSearch.swift; sourceTree = "<group>"; };
 		55D7D980281852C7005D8FBC /* ButtonMeli.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonMeli.swift; sourceTree = "<group>"; };
+		55F9C07F281A37D90098455B /* HelperUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperUI.swift; sourceTree = "<group>"; };
 		55FC525A28184C6400F5E3F2 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		55FC525C28184D1500F5E3F2 /* FavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVC.swift; sourceTree = "<group>"; };
 		8504C050B5BB6BA3284B9D9C /* Pods-SearchMeliTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeliTests.debug.xcconfig"; path = "Target Support Files/Pods-SearchMeliTests/Pods-SearchMeliTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 			children = (
 				55A4694D2819BA85004D4878 /* HelperCoreData.swift */,
 				55A760DA2819F159002F38D0 /* HelperCurrency.swift */,
+				55F9C07F281A37D90098455B /* HelperUI.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -621,6 +624,7 @@
 				556F65A42817740D006AC890 /* ViewController.swift in Sources */,
 				55D7D97B28185282005D8FBC /* NavigationSearch.swift in Sources */,
 				556F65D6281775B2006AC890 /* HomeVC.swift in Sources */,
+				55F9C080281A37D90098455B /* HelperUI.swift in Sources */,
 				55FC525B28184C6400F5E3F2 /* TabBarVC.swift in Sources */,
 				5593268A2818FD270026173B /* QuantityCell.swift in Sources */,
 				559326862818FA5D0026173B /* ColorCell.swift in Sources */,

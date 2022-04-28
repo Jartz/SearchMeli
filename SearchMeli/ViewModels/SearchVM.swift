@@ -10,7 +10,7 @@ import Combine
 
 class SearchVM : ObservableObject {
     
-    @Published var dataSource: ProductResponse? = nil
+    @Published var dataSource: ProductResponse?
     @Published var product: ProductModel? = nil
     var subscriptions = Set<AnyCancellable>()
     

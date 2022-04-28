@@ -77,13 +77,13 @@ class ProducDetailVC : UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationController?.setNavigationBarHidden(true, animated: animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         self.view.endEditing(true)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        navigationController?.setNavigationBarHidden(false, animated: animated)
+        navigationController?.setNavigationBarHidden(false, animated: false)
     }
     
     override func didReceiveMemoryWarning() {
@@ -126,7 +126,7 @@ extension ProducDetailVC : UITableViewDelegate, UITableViewDataSource  {
             return cell
         case 5:
             let cell = tableView.dequeueReusableCell(withIdentifier: "buttonCell", for: indexPath) as! ButtonCell
-            //cell.product = self.result
+            cell.vc = self
             return cell
         default:
             return UITableViewCell()

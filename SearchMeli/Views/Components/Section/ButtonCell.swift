@@ -11,6 +11,7 @@ import UIKit
 
 class ButtonCell : UITableViewCell  {
     
+    var vc : UIViewController!
     var product : ProductModel? {
         didSet {
 //            productImage.image = product?.productImage
@@ -23,21 +24,21 @@ class ButtonCell : UITableViewCell  {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        buttonBuy()
         self.backgroundColor = .clear
         self.selectionStyle = .none
-        buttonBuy()
     }
     
-    
-    
-    
+
     func buttonBuy(){
         let button = UIButton()
+        self.addSubview(button)
         button.setTitle("Comprar Ahora", for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = UIColor(named: "colorBlueMeli")
+        button.addTarget(self, action:  #selector(activeAlert), for: .touchUpInside)
         button.layer.cornerRadius = 6
-        self.addSubview(button)
+       
         button.snp.makeConstraints { make in
             make.top.equalTo(self.snp.top).offset(20)
             make.trailing.equalTo(self.snp.trailing)
@@ -45,6 +46,10 @@ class ButtonCell : UITableViewCell  {
             make.height.equalTo(50)
             make.bottom.equalTo(self.snp.bottom).offset(-20)
         }
+    }
+    
+    @objc func activeAlert(sender:UIButton){
+        HelperUI.showAlert(vc:self.vc)
     }
     
     

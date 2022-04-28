@@ -16,6 +16,8 @@ protocol NavigationSearchDelegate {
 }
 
 class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate  {
+    var heightBar = 98.0
+    var offsetTop = 30
    
     
     var delegate: NavigationSearchDelegate?
@@ -38,6 +40,7 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         search.searchTextField.backgroundColor = .white
         search.backgroundColor = .clear
         search.placeholder = "Buscar en Mercado libre"
+        search.searchTextField.font =  UIFont.systemFont(ofSize: 14)
         search.searchTextField.layer.cornerRadius = 20
         search.searchTextField.layer.masksToBounds = true
         return search
@@ -61,6 +64,7 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         btn.isEnabled = true
         btn.isUserInteractionEnabled = true
         btn.imageView?.contentMode = .scaleAspectFit
+        btn.addTarget(self, action:  #selector(shopScreen), for: .touchUpInside)
         return btn
     }()
     
@@ -99,12 +103,12 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
         self.backgroundColor = UIColor(named: "colorMeli")
         self.snp.makeConstraints { (make) -> Void in
             make.leading.top.trailing.equalToSuperview()
-            make.height.equalTo(80)
+            make.height.equalTo(heightBar)
         }
       
         self.backButton.snp.makeConstraints { (make) -> Void in
             make.leading.equalTo(self.snp.leading).offset(10)
-            make.top.equalTo(self.snp.top).offset(20)
+            make.top.equalTo(self.snp.top).offset(offsetTop)
             make.bottom.equalTo(self.snp.bottom)
             make.height.equalTo(30)
             make.width.equalTo(30)
@@ -120,13 +124,13 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
                 make.leading.equalTo(self.snp.leading).offset(5)
             }
             make.trailing.equalTo(shopButton.snp.leading).offset(-5)
-            make.top.equalTo(self.snp.top).offset(20)
+            make.top.equalTo(self.snp.top).offset(offsetTop)
             make.bottom.equalTo(self.snp.bottom)
         }
         
         self.shopButton.snp.makeConstraints { (make) -> Void in
             make.trailing.equalTo(self.snp.trailing).offset(-10)
-            make.top.equalTo(self.snp.top).offset(20)
+            make.top.equalTo(self.snp.top).offset(offsetTop)
             make.bottom.equalTo(self.snp.bottom)
             make.height.equalTo(30)
             make.width.equalTo(30)
@@ -165,6 +169,10 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
     
     @objc func backScreen(){
         delegate?.actionBackButton()
+    }
+    
+    @objc func shopScreen(){
+        HelperUI.showAlert(vc:self.vc)
     }
     
 

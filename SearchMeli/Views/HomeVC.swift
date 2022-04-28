@@ -87,6 +87,7 @@ extension HomeVC : UITableViewDelegate, UITableViewDataSource  {
             return cell
         case 1:
             let cell = tableView.dequeueReusableCell(withIdentifier: "initialAccount", for: indexPath) as! InitialCell
+            cell.vc = self
             return cell
         default:
             return UITableViewCell()

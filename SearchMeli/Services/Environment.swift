@@ -20,7 +20,7 @@ extension Environment {
         case .staging:
             return "https://api.mercadolibre.com"
         case .production:
-            return "https://api.mercadolibre.com"
+            return ""
         }
     }
 }
