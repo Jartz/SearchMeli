@@ -26,6 +26,7 @@ class ProducDetailVC : UIViewController {
         super.viewDidLoad()
         searchHeader = NavigationSearch(vc: self,blockInput: true, showOnlyIcon: true)
         searchHeader.delegate = self
+        self.internetConnection()
         self.view.endEditing(true)
         self.view.backgroundColor = .white
         binding()
@@ -34,6 +35,7 @@ class ProducDetailVC : UIViewController {
             print(id)
             viewModel.getProduct(id: id)
         }
+       
     }
     
     func binding(){
