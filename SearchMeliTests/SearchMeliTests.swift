@@ -12,12 +12,19 @@ import Combine
 class SearchMeliTests: XCTestCase {
     
      var subscriptions: Set<AnyCancellable> = []
+     var cancelable: Set<AnyCancellable> = []
+    
+     let text = "cama"
+     let idProduct = "MCO830877599"
+    
+     let viewmodel = SearchVM()
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
     }
 
     override func tearDownWithError() throws {
+        print("==FINISHED==")
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
@@ -27,7 +34,7 @@ class SearchMeliTests: XCTestCase {
     /// - Parameters:
     ///     - text: it must be any string.
     func testGetProduct() throws {
-        let text = "cama"
+      
         var products: [Result] = []
         XCTAssert(products.count == 0, "Initial Empty product list")
         let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
@@ -65,12 +72,12 @@ class SearchMeliTests: XCTestCase {
     /// - Parameters:
     ///     - id: The *id*  must be of a real product.
     func testGetProductById() throws {
-        let id: String = "MCO830877599"
+      
         var products: ProductModel!
         XCTAssert(products == nil, "Initial Empty product")
         let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
         let expectation = XCTestExpectation(description: "Call Service")
-        service.getProduct(productId: id)
+        service.getProduct(productId: idProduct)
             .sink { (completion) in
                 switch completion {
                 case .failure:
@@ -145,6 +152,42 @@ class SearchMeliTests: XCTestCase {
         wait(for: [expectation], timeout: 6.5)
         
     }
+    
+    
+    
+    
+    /// viewmodel
+    ///
+    ///
+    func testProductListReceived(){
+        let expectation = XCTestExpectation(description: "Call Service")
+        viewmodel.getProductList(text: text)
+        viewmodel.$dataSource.sink { response in
+            if let result =  response?.results {
+                XCTAssert(!(result[0].id?.isEmpty ?? false), "Product with ID")
+                expectation.fulfill()
+            }
+           
+        }.store(in: &cancelable)
+        wait(for: [expectation], timeout: 3.5)
+        
+    }
+    
+    
+    func testProductReceived(){
+        let expectation = XCTestExpectation(description: "Call Service")
+        viewmodel.getProduct(id: idProduct)
+        viewmodel.$product.sink { product in
+            if let id = product?.id {
+                print(id)
+                XCTAssert(!id.isEmpty,"Product with title")
+            }
+        expectation.fulfill()
+        }.store(in: &cancelable)
+        wait(for: [expectation], timeout: 3.5)
+        
+    }
+    
     
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
