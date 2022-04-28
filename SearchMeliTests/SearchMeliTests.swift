@@ -6,9 +6,12 @@
 //
 
 import XCTest
+import Combine
 @testable import SearchMeli
 
 class SearchMeliTests: XCTestCase {
+    
+     var subscriptions: Set<AnyCancellable> = []
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
@@ -18,14 +21,131 @@ class SearchMeliTests: XCTestCase {
         // Put teardown code here. This method is called after the invocation of each test method in the class.
     }
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
+    ///
+    /// check the service /sites/MCO/search?q={text}
+    ///
+    /// - Parameters:
+    ///     - text: it must be any string.
+    func testGetProduct() throws {
+        let text = "cama"
+        var products: [Result] = []
+        XCTAssert(products.count == 0, "Initial Empty product list")
+        let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
+        let expectation = XCTestExpectation(description: "Call Service")
+        service.getProductList(text: text)
+            .sink { (completion) in
+                switch completion {
+                case .failure:
+                    XCTFail()
+                case .finished:
+                    expectation.fulfill()
+                }
+            } receiveValue: { (reponse) in
+                if let results = reponse.results {
+                    products = results
+                    XCTAssert(products.count > 0, "Products loaded")
+                    if let id = results[0].id{
+                        print(id)
+                        XCTAssert(!id.isEmpty,"Product with ID")
+                    }
+                }else{
+                    XCTFail()
+                }
+                
+            }.store(in: &subscriptions)
+        
+       wait(for: [expectation], timeout: 3.5)
 
+    }
+    
+    
+    ///
+    /// check the service /items/{productId}
+    ///
+    /// - Parameters:
+    ///     - id: The *id*  must be of a real product.
+    func testGetProductById() throws {
+        let id: String = "MCO830877599"
+        var products: ProductModel!
+        XCTAssert(products == nil, "Initial Empty product")
+        let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
+        let expectation = XCTestExpectation(description: "Call Service")
+        service.getProduct(productId: id)
+            .sink { (completion) in
+                switch completion {
+                case .failure:
+                    XCTFail()
+                case .finished:
+                    expectation.fulfill()
+                }
+            } receiveValue: { (reponse) in
+                    products = reponse
+                    if let id = products.id {
+                        print(id)
+                        XCTAssert(!id.isEmpty,"Product with title")
+                    }
+            }.store(in: &subscriptions)
+        
+       wait(for: [expectation], timeout: 3.5)
+
+    }
+    
+    
+    
+    /// PROVOCATE ERROR
+    ///
+    ///check the service /items/{productId}
+    ///
+    /// - Parameters:
+    ///     - text: it must be empty string.
+    func testGetProducstError() throws {
+        let text = ""
+        let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
+        let expectation = XCTestExpectation(description: "Call Service")
+        service.getProductList(text: text)
+            .sink { (completion) in
+                switch completion {
+                case .failure(let error):
+                    XCTAssertEqual(error.localizedDescription, "The operation couldn’t be completed. (SearchMeli.NetworkError error 2.)")
+                    expectation.fulfill()
+                case .finished:
+                    break
+                }
+            } receiveValue: { (reponse) in
+                XCTFail()
+            }.store(in: &subscriptions)
+        
+        wait(for: [expectation], timeout: 6.5)
+        
+    }
+    
+    /// PROVOCATE ERROR
+    ///
+    /// check the service /sites/MCO/search?q={text}
+    ///
+    /// - Parameters:
+    ///     - text: it must be empty string.
+    func testGetProductByIdError() throws {
+        let id = ""
+        let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
+        let expectation = XCTestExpectation(description: "Call Service")
+        service.getProduct(productId: id)
+            .sink { (completion) in
+                switch completion {
+                case .failure(let error):
+                    XCTAssertEqual(error.localizedDescription, "The operation couldn’t be completed. (SearchMeli.NetworkError error 2.)")
+                    expectation.fulfill()
+                case .finished:
+                    break
+                }
+            } receiveValue: { (reponse) in
+                XCTFail()
+            }.store(in: &subscriptions)
+        
+        wait(for: [expectation], timeout: 6.5)
+        
+    }
+    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {
