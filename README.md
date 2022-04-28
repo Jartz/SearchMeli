@@ -15,12 +15,12 @@ This project contains a test for MELI with MVVM architecture with all required p
 ## Features
 
 - MVVM Architecture
-- Layer services
+- Services Layer
 - Searchbar
 - Screen Home
 - Screen last searched
 - Screen product list
-- Screen detail product
+- Screen product detail
 - Icon & Tenmaple similar MELI
 - Core date.
 - Carrousel
