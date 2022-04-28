@@ -12,19 +12,20 @@ class SearchVM : ObservableObject {
     
     @Published var dataSource: ProductResponse?
     @Published var product: ProductModel? = nil
+    @Published var error: Bool? = false
     var subscriptions = Set<AnyCancellable>()
     
     func getProductList(text:String){
         if text.count < 3 {
             return
         }
-        
         let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
         service.getProductList(text: text)
             .sink { (completion) in
                 switch completion {
                 case .failure(let error):
                     print("[Search] error \(error.localizedDescription)")
+                    self.error = true
                 case .finished:
                     break
                 }
@@ -41,6 +42,7 @@ class SearchVM : ObservableObject {
                 switch completion {
                 case .failure(let error):
                     print("oops got an error \(error.localizedDescription)")
+                    self.error = true
                 case .finished:
                     break
                 }

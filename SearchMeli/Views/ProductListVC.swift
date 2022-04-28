@@ -15,28 +15,39 @@ class ProductListVC: UIViewController {
     private var viewModel = SearchVM()
     private var canellables: Set<AnyCancellable> = []
     var tableView: UITableView = UITableView()
-    var searchView = NavigationSearch()
+    var searchView: NavigationSearch!
     var listProd: [Result] = []
     var txtSearched: String = ""
    
     override func viewDidLoad() {
         super.viewDidLoad()
-        viewModel = SearchVM()
         searchView = NavigationSearch(vc: self,blockInput: true)
         searchView.delegate = self
+        self.internetConnection()
         setup()
         if !txtSearched.isEmpty{
+            self.loadingSpinner()
             viewModel.getProductList(text: txtSearched)
         }
         binding()
+        
     }
-    
+
     func binding(){
         viewModel.$dataSource.sink { data in
-            DispatchQueue.main.async { [weak self] in
-                guard let strongSelf = self else { return }
-                strongSelf.listProd = data?.results ?? []
-                strongSelf.tableView.reloadData()
+            if let results =  data?.results {
+                self.hideSpinner()
+                DispatchQueue.main.async { [weak self] in
+                    guard let strongSelf = self else { return }
+                    strongSelf.listProd = results
+                    strongSelf.tableView.reloadData()
+                }
+            }
+        }.store(in: &canellables)
+        
+        viewModel.$error.sink { errorActive in
+            if errorActive ?? false {
+                self.hideSpinner()
             }
         }.store(in: &canellables)
     }

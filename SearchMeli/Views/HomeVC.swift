@@ -22,6 +22,7 @@ class HomeVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor(named: "colorGrayMeli")
         self.title = "Inicio"
+        self.internetConnection()
         self.setupView()
   
     }
