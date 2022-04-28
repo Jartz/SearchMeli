@@ -10,7 +10,7 @@ Demo
 
 ## Swift-MVVM-Combine
 
-This project contains a test for MELI with MVVM architecture with all required podfiles.
+This project contains a test for MELI with MVVM architecture with all required podfiles and without storyboards.
 
 ## Features
 
@@ -22,8 +22,20 @@ This project contains a test for MELI with MVVM architecture with all required p
 - Screen product list
 - Screen product detail
 - Icon & Tenmaple similar MELI
-- Core date.
+- Core date
 - Carrousel
+
+
+## Unit test
+
+in the project can you see 6 unit tests, you can use text & idProduct in the file SearchMeliTests :
+
+- testGetProduct : test services layer of the /sites/MCO/search?q={text}
+- testGetProductById : test services layer of the  /items/{productId}
+- testGetProducstError : test error in services layer of the  /sites/MCO/search?q={text}
+- testGetProductByIdError : test services layer of the  /items/{productId}
+- testProductListReceived : test viewModel for recevied list.
+- testProductReceived : test viewModel for recevied single product.
 
 
 ## Requirements
@@ -40,6 +52,8 @@ You just need to install pods in case you are not getting that.
 - [SnapKit](https://cocoapods.org/pods/SnapKit)
 - [FSPagerView](https://cocoapods.org/pods/FSPagerView)
 - [Kingfisher](https://github.com/onevcat/Kingfisher)
+
+
 
 
 ## Usage
