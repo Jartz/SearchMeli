@@ -48,13 +48,13 @@ struct Sort: Codable {
 // MARK: - Filter
 struct Filter: Codable {
     let id, name, type: String?
-    let values: [FilterValue]
+    let values: [FilterValue]?
 }
 
 // MARK: - FilterValue
 struct FilterValue: Codable {
     let id, name: String?
-    let pathFromRoot: [Sort]
+    let pathFromRoot: [Sort]?
 
     enum CodingKeys: String, CodingKey {
         case id, name
