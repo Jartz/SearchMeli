@@ -11,7 +11,7 @@ import MapKit
 import Kingfisher
 
 class ProductListVC: UIViewController {
-    private var viewModel = SearchVM()
+    private var viewModel = ProductVM()
     private var canellables: Set<AnyCancellable> = []
     var tableView: UITableView = UITableView()
     var searchView: NavigationSearch!

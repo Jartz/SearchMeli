@@ -10,7 +10,7 @@ import MapKit
 import Kingfisher
 
 class ProductSearchedVC: UIViewController {
-    private var viewModel = SearchVM()
+    var viewModel: ProductVM!
     private var canellables: Set<AnyCancellable> = []
     var tableView: UITableView = UITableView()
     lazy var searchView = NavigationSearch()
@@ -22,7 +22,7 @@ class ProductSearchedVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = .white
-        viewModel = SearchVM()
+        viewModel = ProductVM()
         searchView = NavigationSearch(vc: self)
         searchView.delegate = self
         setup()

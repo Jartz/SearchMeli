@@ -8,7 +8,7 @@
 import Foundation
 import Combine
 
-class SearchVM: ObservableObject {
+class ProductVM: ObservableObject {
     @Published var dataSource: ProductResponse?
     @Published var product: ProductModel?
     @Published var error: Bool? = false

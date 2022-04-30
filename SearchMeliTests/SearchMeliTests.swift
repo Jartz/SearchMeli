@@ -14,10 +14,10 @@ class SearchMeliTests: XCTestCase {
      var subscriptions: Set<AnyCancellable> = []
      var cancelable: Set<AnyCancellable> = []
     
-     let text = "cama"
+     let text = "iphone 14"
      let idProduct = "MCO830877599"
     
-     let viewmodel = SearchVM()
+     let viewmodel = ProductVM()
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.

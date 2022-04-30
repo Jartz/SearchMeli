@@ -12,7 +12,7 @@ import Kingfisher
 
 class ProducDetailVC: UIViewController {
     private var canellables: Set<AnyCancellable> = []
-    var viewModel = SearchVM()
+    var viewModel = ProductVM()
     lazy var searchHeader = NavigationSearch()
     var result: Result?
     var productDetail: ProductModel?
