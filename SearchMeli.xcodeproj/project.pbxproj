@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		24E20AD9D92E6B7DCC241D4B /* Pods_SearchMeli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 15C29B39EDCF6DE571BD2F70 /* Pods_SearchMeli.framework */; };
-		285F9440BDD6D280CF342EF9 /* Pods_SearchMeli_SearchMeliUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 39D38CB08C17E8D0FC90B399 /* Pods_SearchMeli_SearchMeliUITests.framework */; };
-		47D2C72D9C731BD7CE742CF9 /* Pods_SearchMeliTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD8DC78F88FA00EC7B2DD19C /* Pods_SearchMeliTests.framework */; };
+		0634905E967A556183AE03EA /* Pods_SearchMeliTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4762E883704B0D9CA2254AA9 /* Pods_SearchMeliTests.framework */; };
 		556F65A02817740D006AC890 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556F659F2817740D006AC890 /* AppDelegate.swift */; };
 		556F65A22817740D006AC890 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556F65A12817740D006AC890 /* SceneDelegate.swift */; };
 		556F65A42817740D006AC890 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556F65A32817740D006AC890 /* ViewController.swift */; };
@@ -57,6 +55,8 @@
 		55F9C080281A37D90098455B /* HelperUI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55F9C07F281A37D90098455B /* HelperUI.swift */; };
 		55FC525B28184C6400F5E3F2 /* TabBarVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC525A28184C6400F5E3F2 /* TabBarVC.swift */; };
 		55FC525D28184D1500F5E3F2 /* FavoriteVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FC525C28184D1500F5E3F2 /* FavoriteVC.swift */; };
+		82DA938C775C7BE795EA0E47 /* Pods_SearchMeli.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 481C65E22388208BBD5D2FD3 /* Pods_SearchMeli.framework */; };
+		B580B249046F30E2386018B9 /* Pods_SearchMeli_SearchMeliUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63AC1C0218DA09E983140048 /* Pods_SearchMeli_SearchMeliUITests.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,8 +77,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		15C29B39EDCF6DE571BD2F70 /* Pods_SearchMeli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchMeli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		39D38CB08C17E8D0FC90B399 /* Pods_SearchMeli_SearchMeliUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchMeli_SearchMeliUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		1E7483F3DDDE7CAB214F12F7 /* Pods-SearchMeliTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeliTests.debug.xcconfig"; path = "Target Support Files/Pods-SearchMeliTests/Pods-SearchMeliTests.debug.xcconfig"; sourceTree = "<group>"; };
+		4762E883704B0D9CA2254AA9 /* Pods_SearchMeliTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchMeliTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		481C65E22388208BBD5D2FD3 /* Pods_SearchMeli.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchMeli.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4CEA16FBF5F99A733EDA31DC /* Pods-SearchMeliTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeliTests.release.xcconfig"; path = "Target Support Files/Pods-SearchMeliTests/Pods-SearchMeliTests.release.xcconfig"; sourceTree = "<group>"; };
+		5170C33D633E6D7644C4D628 /* Pods-SearchMeli-SearchMeliUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeli-SearchMeliUITests.release.xcconfig"; path = "Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests.release.xcconfig"; sourceTree = "<group>"; };
 		556F659C2817740D006AC890 /* SearchMeli.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SearchMeli.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		556F659F2817740D006AC890 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		556F65A12817740D006AC890 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -130,13 +133,10 @@
 		55F9C07F281A37D90098455B /* HelperUI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HelperUI.swift; sourceTree = "<group>"; };
 		55FC525A28184C6400F5E3F2 /* TabBarVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarVC.swift; sourceTree = "<group>"; };
 		55FC525C28184D1500F5E3F2 /* FavoriteVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteVC.swift; sourceTree = "<group>"; };
-		8504C050B5BB6BA3284B9D9C /* Pods-SearchMeliTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeliTests.debug.xcconfig"; path = "Target Support Files/Pods-SearchMeliTests/Pods-SearchMeliTests.debug.xcconfig"; sourceTree = "<group>"; };
-		91BD6AF6CC54D260A1F756DB /* Pods-SearchMeli-SearchMeliUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeli-SearchMeliUITests.release.xcconfig"; path = "Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests.release.xcconfig"; sourceTree = "<group>"; };
-		91D7AAE8CCE50FCAF96B8B7D /* Pods-SearchMeli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeli.release.xcconfig"; path = "Target Support Files/Pods-SearchMeli/Pods-SearchMeli.release.xcconfig"; sourceTree = "<group>"; };
-		D987FBAEBE0B1DDBEB4256D1 /* Pods-SearchMeli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeli.debug.xcconfig"; path = "Target Support Files/Pods-SearchMeli/Pods-SearchMeli.debug.xcconfig"; sourceTree = "<group>"; };
-		DD8DC78F88FA00EC7B2DD19C /* Pods_SearchMeliTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchMeliTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		E28FEA1EDF3F89E97BE2D7AB /* Pods-SearchMeli-SearchMeliUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeli-SearchMeliUITests.debug.xcconfig"; path = "Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		F801870ECA4AD237B5CE095A /* Pods-SearchMeliTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeliTests.release.xcconfig"; path = "Target Support Files/Pods-SearchMeliTests/Pods-SearchMeliTests.release.xcconfig"; sourceTree = "<group>"; };
+		63AC1C0218DA09E983140048 /* Pods_SearchMeli_SearchMeliUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SearchMeli_SearchMeliUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6A220A158C2E0F7B85E28758 /* Pods-SearchMeli.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeli.release.xcconfig"; path = "Target Support Files/Pods-SearchMeli/Pods-SearchMeli.release.xcconfig"; sourceTree = "<group>"; };
+		8FC20B201DEC187F2744AD2B /* Pods-SearchMeli-SearchMeliUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeli-SearchMeliUITests.debug.xcconfig"; path = "Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		CE736D27AF642D684E90AD0E /* Pods-SearchMeli.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SearchMeli.debug.xcconfig"; path = "Target Support Files/Pods-SearchMeli/Pods-SearchMeli.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,7 +144,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				24E20AD9D92E6B7DCC241D4B /* Pods_SearchMeli.framework in Frameworks */,
+				82DA938C775C7BE795EA0E47 /* Pods_SearchMeli.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,7 +152,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				47D2C72D9C731BD7CE742CF9 /* Pods_SearchMeliTests.framework in Frameworks */,
+				0634905E967A556183AE03EA /* Pods_SearchMeliTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -160,13 +160,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				285F9440BDD6D280CF342EF9 /* Pods_SearchMeli_SearchMeliUITests.framework in Frameworks */,
+				B580B249046F30E2386018B9 /* Pods_SearchMeli_SearchMeliUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		34B9A9966BC2ADDCCFC67068 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				481C65E22388208BBD5D2FD3 /* Pods_SearchMeli.framework */,
+				63AC1C0218DA09E983140048 /* Pods_SearchMeli_SearchMeliUITests.framework */,
+				4762E883704B0D9CA2254AA9 /* Pods_SearchMeliTests.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		556F65932817740D006AC890 = {
 			isa = PBXGroup;
 			children = (
@@ -175,7 +185,7 @@
 				556F65BF2817740F006AC890 /* SearchMeliUITests */,
 				556F659D2817740D006AC890 /* Products */,
 				AF8D60D7A5E811602D030529 /* Pods */,
-				586DB0E57507ABC7BFD11C50 /* Frameworks */,
+				34B9A9966BC2ADDCCFC67068 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -370,25 +380,15 @@
 			path = Button;
 			sourceTree = "<group>";
 		};
-		586DB0E57507ABC7BFD11C50 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				15C29B39EDCF6DE571BD2F70 /* Pods_SearchMeli.framework */,
-				39D38CB08C17E8D0FC90B399 /* Pods_SearchMeli_SearchMeliUITests.framework */,
-				DD8DC78F88FA00EC7B2DD19C /* Pods_SearchMeliTests.framework */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
 		AF8D60D7A5E811602D030529 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D987FBAEBE0B1DDBEB4256D1 /* Pods-SearchMeli.debug.xcconfig */,
-				91D7AAE8CCE50FCAF96B8B7D /* Pods-SearchMeli.release.xcconfig */,
-				E28FEA1EDF3F89E97BE2D7AB /* Pods-SearchMeli-SearchMeliUITests.debug.xcconfig */,
-				91BD6AF6CC54D260A1F756DB /* Pods-SearchMeli-SearchMeliUITests.release.xcconfig */,
-				8504C050B5BB6BA3284B9D9C /* Pods-SearchMeliTests.debug.xcconfig */,
-				F801870ECA4AD237B5CE095A /* Pods-SearchMeliTests.release.xcconfig */,
+				CE736D27AF642D684E90AD0E /* Pods-SearchMeli.debug.xcconfig */,
+				6A220A158C2E0F7B85E28758 /* Pods-SearchMeli.release.xcconfig */,
+				8FC20B201DEC187F2744AD2B /* Pods-SearchMeli-SearchMeliUITests.debug.xcconfig */,
+				5170C33D633E6D7644C4D628 /* Pods-SearchMeli-SearchMeliUITests.release.xcconfig */,
+				1E7483F3DDDE7CAB214F12F7 /* Pods-SearchMeliTests.debug.xcconfig */,
+				4CEA16FBF5F99A733EDA31DC /* Pods-SearchMeliTests.release.xcconfig */,
 			);
 			path = Pods;
 			sourceTree = "<group>";
@@ -400,11 +400,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 556F65C62817740F006AC890 /* Build configuration list for PBXNativeTarget "SearchMeli" */;
 			buildPhases = (
-				1E52C83562A2A0D6E9A646C4 /* [CP] Check Pods Manifest.lock */,
+				DA9B06CFAC9FC1CCC84C9F18 /* [CP] Check Pods Manifest.lock */,
 				556F65982817740D006AC890 /* Sources */,
 				556F65992817740D006AC890 /* Frameworks */,
 				556F659A2817740D006AC890 /* Resources */,
-				9C511492E3B088F13977BB55 /* [CP] Embed Pods Frameworks */,
+				55870918281CB2AB00B22F43 /* Swiftlint */,
+				464EFF364A47291F023A033D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -419,7 +420,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 556F65C92817740F006AC890 /* Build configuration list for PBXNativeTarget "SearchMeliTests" */;
 			buildPhases = (
-				C564E917EB19F1D005C7566B /* [CP] Check Pods Manifest.lock */,
+				91572B57C81EF8D6F33C1A71 /* [CP] Check Pods Manifest.lock */,
 				556F65AE2817740F006AC890 /* Sources */,
 				556F65AF2817740F006AC890 /* Frameworks */,
 				556F65B02817740F006AC890 /* Resources */,
@@ -438,11 +439,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 556F65CC2817740F006AC890 /* Build configuration list for PBXNativeTarget "SearchMeliUITests" */;
 			buildPhases = (
-				4763694EF28C6D3B307A3DA3 /* [CP] Check Pods Manifest.lock */,
+				A290579167586471A2847087 /* [CP] Check Pods Manifest.lock */,
 				556F65B82817740F006AC890 /* Sources */,
 				556F65B92817740F006AC890 /* Frameworks */,
 				556F65BA2817740F006AC890 /* Resources */,
-				B98235750CAEC52F0EED1AA2 /* [CP] Embed Pods Frameworks */,
+				146A0AD0EFECDCC19EC88773 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -529,7 +530,59 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		1E52C83562A2A0D6E9A646C4 /* [CP] Check Pods Manifest.lock */ = {
+		146A0AD0EFECDCC19EC88773 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		464EFF364A47291F023A033D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SearchMeli/Pods-SearchMeli-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-SearchMeli/Pods-SearchMeli-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SearchMeli/Pods-SearchMeli-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		55870918281CB2AB00B22F43 /* Swiftlint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Swiftlint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if which swiftlint > /dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		91572B57C81EF8D6F33C1A71 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -544,14 +597,14 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SearchMeli-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SearchMeliTests-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		4763694EF28C6D3B307A3DA3 /* [CP] Check Pods Manifest.lock */ = {
+		A290579167586471A2847087 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -573,41 +626,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		9C511492E3B088F13977BB55 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SearchMeli/Pods-SearchMeli-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SearchMeli/Pods-SearchMeli-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SearchMeli/Pods-SearchMeli-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		B98235750CAEC52F0EED1AA2 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests-frameworks-${CONFIGURATION}-input-files.xcfilelist",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests-frameworks-${CONFIGURATION}-output-files.xcfilelist",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-SearchMeli-SearchMeliUITests/Pods-SearchMeli-SearchMeliUITests-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		C564E917EB19F1D005C7566B /* [CP] Check Pods Manifest.lock */ = {
+		DA9B06CFAC9FC1CCC84C9F18 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -622,7 +641,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-SearchMeliTests-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-SearchMeli-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -846,7 +865,7 @@
 		};
 		556F65C72817740F006AC890 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D987FBAEBE0B1DDBEB4256D1 /* Pods-SearchMeli.debug.xcconfig */;
+			baseConfigurationReference = CE736D27AF642D684E90AD0E /* Pods-SearchMeli.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -874,7 +893,7 @@
 		};
 		556F65C82817740F006AC890 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91D7AAE8CCE50FCAF96B8B7D /* Pods-SearchMeli.release.xcconfig */;
+			baseConfigurationReference = 6A220A158C2E0F7B85E28758 /* Pods-SearchMeli.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -902,7 +921,7 @@
 		};
 		556F65CA2817740F006AC890 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 8504C050B5BB6BA3284B9D9C /* Pods-SearchMeliTests.debug.xcconfig */;
+			baseConfigurationReference = 1E7483F3DDDE7CAB214F12F7 /* Pods-SearchMeliTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -922,7 +941,7 @@
 		};
 		556F65CB2817740F006AC890 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = F801870ECA4AD237B5CE095A /* Pods-SearchMeliTests.release.xcconfig */;
+			baseConfigurationReference = 4CEA16FBF5F99A733EDA31DC /* Pods-SearchMeliTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -942,7 +961,7 @@
 		};
 		556F65CD2817740F006AC890 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E28FEA1EDF3F89E97BE2D7AB /* Pods-SearchMeli-SearchMeliUITests.debug.xcconfig */;
+			baseConfigurationReference = 8FC20B201DEC187F2744AD2B /* Pods-SearchMeli-SearchMeliUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -960,7 +979,7 @@
 		};
 		556F65CE2817740F006AC890 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91BD6AF6CC54D260A1F756DB /* Pods-SearchMeli-SearchMeliUITests.release.xcconfig */;
+			baseConfigurationReference = 5170C33D633E6D7644C4D628 /* Pods-SearchMeli-SearchMeliUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;

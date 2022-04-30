@@ -8,9 +8,7 @@
 import Foundation
 
 class HelperCurrency {
-    
-    
-    static func convertCurrency(price: Int) -> String{
+    static func convertCurrency(price: Int) -> String {
         let myDouble = Double(price)
         let currencyFormatter = NumberFormatter()
         currencyFormatter.usesGroupingSeparator = true

@@ -4,8 +4,6 @@
 //
 //  Created by Julian Ramos on 4/26/22.
 //
-
-
 public enum Environment: String, CaseIterable {
     case development
     case staging

@@ -194,16 +194,11 @@ enum AttributeGroupID: String, Codable {
 enum AttributeGroupName: String, Codable {
     case otros = "Otros"
 }
-
-
-
 // MARK: - Struct
 struct Struct: Codable {
     let number: Double?
     let unit: String?
 }
-
-
 // MARK: - AttributeValue
 struct AttributeValue: Codable {
     let valueStruct: Struct?
@@ -215,15 +210,9 @@ struct AttributeValue: Codable {
         case source, id, name
     }
 }
-
-
-
 enum Condition: String, Codable {
     case new = "new"
 }
-
-
-
 // MARK: - DifferentialPricing
 struct DifferentialPricing: Codable {
     let id: Int?
@@ -275,7 +264,7 @@ struct Price: Codable {
     let id: String?
     let type: PriceType
     let amount: Amount?
-    let regularAmount: Int?
+//    let regularAmount: Int?
     let currencyID: String?
 //    let lastUpdated: Date?
     let conditions: Conditions
@@ -284,7 +273,7 @@ struct Price: Codable {
 
     enum CodingKeys: String, CodingKey {
         case id, type, amount
-        case regularAmount = "regular_amount"
+//        case regularAmount = "regular_amount"
         case currencyID = "currency_id"
 //        case lastUpdated = "last_updated"
         case conditions
@@ -493,10 +482,10 @@ class JSONNull: Codable, Hashable {
         return true
     }
 
-    public var hashValue: Int {
-        return 0
+    public func hash(into hasher: inout Hasher) {
+            hasher.combine(0)
     }
-
+    
     public init() {}
 
     public required init(from decoder: Decoder) throws {

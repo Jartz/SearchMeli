@@ -7,15 +7,12 @@
 
 import Foundation
 import UIKit
-
+import Kingfisher
 
 extension UIViewController {
-   
-    
-     func internetConnection(){
-        if InternetConnectionManager.isConnectedToNetwork(){
-            print("Connect")
-        }else{
+     func internetConnection() {
+        if InternetConnectionManager.isConnectedToNetwork() {
+        } else {
             let view = UIView()
             self.view.addSubview(view)
             view.backgroundColor = UIColor(named: "colorBackgroundMeli")
@@ -37,9 +34,13 @@ extension UIViewController {
             }
         }
     }
-    
-    
-    func loadingSpinner(){
+    func clearCache() {
+        let cache = KingfisherManager.shared.cache
+        cache.clearMemoryCache()
+        cache.clearDiskCache(completion: nil)
+        cache.cleanExpiredDiskCache()
+    }
+    func loadingSpinner() {
         DispatchQueue.main.async {
         let spinnerview = SpinnerView()
         self.view.addSubview(spinnerview)
@@ -52,10 +53,8 @@ extension UIViewController {
             make.centerY.equalTo(self.view.snp.centerY)
         }
         }
-        
     }
-    
-    func hideSpinner(){
+    func hideSpinner() {
         DispatchQueue.main.async {
             if let viewWithTag = self.view.viewWithTag(100) {
                 viewWithTag.removeFromSuperview()

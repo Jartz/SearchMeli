@@ -9,18 +9,17 @@ import Foundation
 import CoreData
 import UIKit
 
-
 class HelperCoreData {
-    
-    static func saveSearchedData(name:String){
+    static func saveSearchedData(name: String) {
         let currentData = getSearchedData()
-        if(currentData.count > 0){
-            if (currentData.filter{$0 == name}.count > 0){
+        if currentData.count > 0 {
+            if (currentData.filter {$0 == name}.count > 0) {
                 return
             }
         }
-        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
-        let entity = NSEntityDescription.entity(forEntityName: "SearchedEntity", in : managedContext)!
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return }
+        let managedContext = delegate.persistentContainer.viewContext
+        let entity = NSEntityDescription.entity(forEntityName: "SearchedEntity", in: managedContext)!
         let record = NSManagedObject(entity: entity, insertInto: managedContext)
         record.setValue(name, forKey: "name")
         do {
@@ -31,18 +30,14 @@ class HelperCoreData {
             print("Could not save. \(error),\(error.userInfo)")
         }
     }
-    
-    static func getSearchedData() -> [String]{
-        let managedContext = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+    static func getSearchedData() -> [String] {
+        guard let delegate = UIApplication.shared.delegate as? AppDelegate else { return [] }
+        let managedContext = delegate.persistentContainer.viewContext
         let request = NSFetchRequest<NSFetchRequestResult>(entityName: "SearchedEntity")
         request.returnsObjectsAsFaults = false
         do {
-        let result = try managedContext.fetch(request) as! [NSManagedObject]
-            let resultString = result.map{ return $0.value(forKey: "name") as! String }
-//        for data in result as! [NSManagedObject] {
-//        print(data.value(forKey: "name") as! String)
-//        }
-        print(resultString)
+            guard let result = try managedContext.fetch(request) as? [NSManagedObject] else { return []}
+            let resultString = result.map { return $0.value(forKey: "name") as! String }
         return resultString
         } catch {
         print("Failed")

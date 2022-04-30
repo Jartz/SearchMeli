@@ -15,7 +15,6 @@ public class NativeRequestable: Requestable {
      where T: Decodable {
         let sessionConfig = URLSessionConfiguration.default
         sessionConfig.timeoutIntervalForRequest = TimeInterval(req.requestTimeOut ?? requestTimeOut)
-        
         guard let url = URL(string: req.url) else {
             // Return a fail publisher if the url is invalid
             return AnyPublisher(

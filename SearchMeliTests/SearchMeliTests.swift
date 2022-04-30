@@ -64,8 +64,6 @@ class SearchMeliTests: XCTestCase {
        wait(for: [expectation], timeout: 3.5)
 
     }
-    
-    
     ///
     /// check the service /items/{productId}
     ///
@@ -96,9 +94,6 @@ class SearchMeliTests: XCTestCase {
        wait(for: [expectation], timeout: 3.5)
 
     }
-    
-    
-    
     /// PROVOCATE ERROR
     ///
     ///check the service /items/{productId}
@@ -148,18 +143,12 @@ class SearchMeliTests: XCTestCase {
             } receiveValue: { (reponse) in
                 XCTFail()
             }.store(in: &subscriptions)
-        
         wait(for: [expectation], timeout: 6.5)
-        
     }
-    
-    
-    
-    
     /// viewmodel
     ///
     ///
-    func testProductListReceived(){
+    func testProductListReceived() {
         let expectation = XCTestExpectation(description: "Call Service")
         viewmodel.getProductList(text: text)
         viewmodel.$dataSource.sink { response in
@@ -172,9 +161,7 @@ class SearchMeliTests: XCTestCase {
         wait(for: [expectation], timeout: 3.5)
         
     }
-    
-    
-    func testProductReceived(){
+    func testProductReceived() {
         let expectation = XCTestExpectation(description: "Call Service")
         viewmodel.getProduct(id: idProduct)
         viewmodel.$product.sink { product in
@@ -187,8 +174,6 @@ class SearchMeliTests: XCTestCase {
         wait(for: [expectation], timeout: 3.5)
         
     }
-    
-    
     func testPerformanceExample() throws {
         // This is an example of a performance test case.
         self.measure {

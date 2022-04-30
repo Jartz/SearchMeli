@@ -8,14 +8,12 @@
 import Foundation
 import Combine
 
-class SearchVM : ObservableObject {
-    
+class SearchVM: ObservableObject {
     @Published var dataSource: ProductResponse?
-    @Published var product: ProductModel? = nil
+    @Published var product: ProductModel?
     @Published var error: Bool? = false
     var subscriptions = Set<AnyCancellable>()
-    
-    func getProductList(text:String){
+    func getProductList(text: String) {
         if text.count < 3 {
             return
         }
@@ -34,8 +32,7 @@ class SearchVM : ObservableObject {
             }
             .store(in: &subscriptions)
     }
-    
-    func getProduct(id:String){
+    func getProduct(id: String) {
         let service = MeliService(networkRequest: NativeRequestable(), environment: .development)
         service.getProduct(productId: id)
             .sink { (completion) in
@@ -51,5 +48,4 @@ class SearchVM : ObservableObject {
             }
             .store(in: &subscriptions)
     }
-    
 }
