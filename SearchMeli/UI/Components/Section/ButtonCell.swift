@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class ButtonCell: UITableViewCell {
-    var vc: UIViewController!
+    weak var vc: UIViewController?
     var product: ProductModel? {
         didSet {
         }
@@ -38,7 +38,8 @@ class ButtonCell: UITableViewCell {
         }
     }
     @objc func activeAlert(sender: UIButton) {
-        HelperUI.showAlert(vc: self.vc)
+        guard let vc = self.vc else {return }
+        HelperUI.showAlert(vc: vc)
     }
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)

@@ -19,14 +19,17 @@ class NavigationSearch: UIView, UISearchBarDelegate, UIGestureRecognizerDelegate
     var heightBar = 98.0
     var offsetTop = 30
     weak var delegate: NavigationSearchDelegate?
-    var navigationController: UINavigationController?
-    var vc: UIViewController!
+    weak var navigationController: UINavigationController?
+    weak var vc: UIViewController!
     var blockInput: Bool = false
     var label: UILabel =  {
         var label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
+    deinit {
+       // print("delete in memory NavigationSearch")
+    }
     var searchBar: UISearchBar =  {
         var search = UISearchBar()
         search.translatesAutoresizingMaskIntoConstraints = false

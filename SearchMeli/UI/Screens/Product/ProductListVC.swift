@@ -11,39 +11,43 @@ import MapKit
 import Kingfisher
 
 class ProductListVC: UIViewController {
-    private var viewModel = ProductVM()
+    private var viewModel: ProductVM?
     private var canellables: Set<AnyCancellable> = []
     var tableView: UITableView = UITableView()
-    var searchView: NavigationSearch!
+    var searchView: NavigationSearch?
     var listProd: [Result] = []
     var txtSearched: String = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
         searchView = NavigationSearch(vc: self, blockInput: true)
-        searchView.delegate = self
+        viewModel = ProductVM()
+        searchView?.delegate = self
         self.internetConnection()
         setup()
         if !txtSearched.isEmpty {
             self.loadingSpinner()
-            viewModel.getProductList(text: txtSearched)
+            viewModel?.getProductList(text: txtSearched)
         }
         binding()
     }
+    deinit {
+        print("Delete in memory ProductListVC")
+    }
 
     func binding() {
-        viewModel.$dataSource.sink { data in
+        viewModel?.$dataSource.sink { [weak self] data in
             if let results =  data?.results {
-                self.hideSpinner()
-                DispatchQueue.main.async { [weak self] in
-                    self?.listProd = results
+                self?.hideSpinner()
+                self?.listProd = results
+                DispatchQueue.main.async {
                     self?.tableView.reloadData()
                 }
             }
         }.store(in: &canellables)
-        viewModel.$error.sink { errorActive in
+        viewModel?.$error.sink {  [weak self] errorActive in
             if errorActive ?? false {
-                self.hideSpinner()
+                self?.hideSpinner()
             }
         }.store(in: &canellables)
     }
@@ -54,7 +58,8 @@ class ProductListVC: UIViewController {
         tableView.register(ProductCard.self, forCellReuseIdentifier: "productCard")
         tableView.snp.makeConstraints { make in
             make.bottom.leading.trailing.equalToSuperview()
-            make.top.equalTo(searchView.snp.bottom)
+            guard let search = searchView else { return }
+            make.top.equalTo(search.snp.bottom)
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -63,8 +68,10 @@ class ProductListVC: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        viewModel = nil
+        searchView = nil
         self.clearCache()
+        super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
     }
     override func didReceiveMemoryWarning() {
@@ -78,7 +85,7 @@ extension ProductListVC: NavigationSearchDelegate {
         return
     }
     func textDidChange(text: String) {
-        viewModel.getProductList(text: text)
+        viewModel?.getProductList(text: text)
     }
     func actionBackButton() {
         self.navigationController?.popToRootViewController(animated: true)

@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 class InitialCell: UITableViewCell {
-    var vc: UIViewController!
+    weak var vc: UIViewController?
     var stackContainer: UIStackView!
     public required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -61,6 +61,7 @@ class InitialCell: UITableViewCell {
         }
     }
     @objc func activeAlert() {
-        HelperUI.showAlert(vc: self.vc)
+        guard let vc = self.vc else { return }
+        HelperUI.showAlert(vc: vc)
     }
 }

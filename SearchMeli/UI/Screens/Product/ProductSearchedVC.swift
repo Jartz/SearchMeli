@@ -10,10 +10,10 @@ import MapKit
 import Kingfisher
 
 class ProductSearchedVC: UIViewController {
-    var viewModel: ProductVM!
+    var viewModel: ProductVM?
     private var canellables: Set<AnyCancellable> = []
     var tableView: UITableView = UITableView()
-    lazy var searchView = NavigationSearch()
+    var searchView: NavigationSearch?
     var listProd: [Result] = []
     var listSearched: [String] = []
     var callback: ((String) -> Void)?
@@ -23,8 +23,9 @@ class ProductSearchedVC: UIViewController {
         super.viewDidLoad()
         self.view.backgroundColor = .white
         viewModel = ProductVM()
+        searchView = NavigationSearch()
         searchView = NavigationSearch(vc: self)
-        searchView.delegate = self
+        searchView?.delegate = self
         setup()
         getSearchedList()
     }
@@ -43,7 +44,8 @@ class ProductSearchedVC: UIViewController {
         tableView.snp.makeConstraints { make in
             make.leading.equalToSuperview().offset(16)
             make.bottom.trailing.equalToSuperview().offset(-16)
-            make.top.equalTo(searchView.snp.bottom)
+            guard let search = searchView else { return }
+            make.top.equalTo(search.snp.bottom)
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -51,6 +53,8 @@ class ProductSearchedVC: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: animated)
     }
     override func viewWillDisappear(_ animated: Bool) {
+        viewModel = nil
+        searchView = nil
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -59,6 +63,9 @@ class ProductSearchedVC: UIViewController {
         cache.clearMemoryCache()
         cache.clearDiskCache(completion: nil)
         cache.cleanExpiredDiskCache()
+    }
+    deinit {
+        print("delete in memory ProductSearchedVC")
     }
 
 }

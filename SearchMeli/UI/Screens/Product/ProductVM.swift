@@ -9,9 +9,9 @@ import Foundation
 import Combine
 
 class ProductVM: ObservableObject {
-    @Published var dataSource: ProductResponse?
-    @Published var product: ProductModel?
-    @Published var error: Bool? = false
+    @Published  var dataSource: ProductResponse?
+    @Published  var product: ProductModel?
+    @Published  var error: Bool? = false
     var subscriptions = Set<AnyCancellable>()
     func getProductList(text: String) {
         if text.count < 3 {

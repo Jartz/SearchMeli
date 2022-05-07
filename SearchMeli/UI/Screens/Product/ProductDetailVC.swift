@@ -12,8 +12,8 @@ import Kingfisher
 
 class ProducDetailVC: UIViewController {
     private var canellables: Set<AnyCancellable> = []
-    var viewModel = ProductVM()
-    lazy var searchHeader = NavigationSearch()
+    var viewModel: ProductVM?
+    var searchHeader: NavigationSearch?
     var result: Result?
     var productDetail: ProductModel?
     var pagerView: FSPagerView?
@@ -22,21 +22,27 @@ class ProducDetailVC: UIViewController {
     let cellId = "TextCell"
     override func viewDidLoad() {
         super.viewDidLoad()
+         viewModel = ProductVM()
         searchHeader = NavigationSearch(vc: self, blockInput: true, showOnlyIcon: true)
-        searchHeader.delegate = self
-        self.internetConnection()
+        searchHeader?.delegate = self
+        //self.internetConnection()
         self.view.endEditing(true)
         self.view.backgroundColor = .white
         binding()
         setup()
         if let id = result?.id {
-            viewModel.getProduct(id: id)
+            viewModel?.getProduct(id: id)
         }
     }
+
+    deinit {
+        print("delete in memory ProducDetailVC")
+    }
+    
     func binding() {
-        viewModel.$product.sink { product in
-            DispatchQueue.main.async {  [weak self] in
-                self?.productDetail = product
+        viewModel?.$product.sink { [weak self] response in
+            self?.productDetail = response
+            DispatchQueue.main.async {
                 self?.pagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: self?.view.frame.width ?? 0, height: 300))
                 self?.pagerView?.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
                 self?.pagerView?.backgroundView?.removeFromSuperview()
@@ -63,7 +69,8 @@ class ProducDetailVC: UIViewController {
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview()
-            make.top.equalTo(searchHeader.snp.bottom)
+            guard let search = searchHeader else { return }
+            make.top.equalTo(search.snp.bottom)
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -72,9 +79,15 @@ class ProducDetailVC: UIViewController {
         self.view.endEditing(true)
     }
     override func viewWillDisappear(_ animated: Bool) {
+        viewModel = nil
+        searchHeader  = nil
+        pagerView = nil
+        productDetail = nil
+        result = nil
+        self.clearCache()
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
-        self.clearCache()
+       
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -88,6 +101,7 @@ extension ProducDetailVC: UITableViewDelegate, UITableViewDataSource {
         return 6
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+       
         switch indexPath.row {
         case 0:
             let cell = tableView.dequeueReusableCell(withIdentifier: "titleInfoCell", for: indexPath) as? TitleInfoCell

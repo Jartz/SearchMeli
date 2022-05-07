@@ -10,7 +10,7 @@ import FSPagerView
 
 import UIKit
 class HomeVC: UIViewController {
-    var pagerView: FSPagerView!
+    var pagerView: FSPagerView?
     let list = ["banner-home-1", "banner-home-2"]
     var tableView: UITableView = UITableView()
     let cellId = "TextCell"
@@ -27,6 +27,7 @@ class HomeVC: UIViewController {
     }
 
     override func viewWillDisappear(_ animated: Bool) {
+        pagerView = nil
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: animated)
     }
@@ -47,14 +48,18 @@ class HomeVC: UIViewController {
             make.top.equalTo(navigationSearch.snp.bottom).offset(20)
         }
         pagerView = FSPagerView(frame: CGRect.zero)
-        pagerView.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
-        pagerView.dataSource = self
-        pagerView.delegate = self
-        pagerView.translatesAutoresizingMaskIntoConstraints = false
+        pagerView?.register(FSPagerViewCell.self, forCellWithReuseIdentifier: "cell")
+        pagerView?.dataSource = self
+        pagerView?.delegate = self
+        pagerView?.translatesAutoresizingMaskIntoConstraints = false
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        print("delete in memory Home")
     }
 }
 
