@@ -12,26 +12,24 @@ import Kingfisher
 
 class ProducDetailVC: UIViewController {
     private var canellables: Set<AnyCancellable> = []
-    var viewModel: ProductVM?
-    var searchHeader: NavigationSearch?
+    lazy var viewModel = ProductVM()
+    lazy var searchHeader = NavigationSearch(vc: self, blockInput: true, showOnlyIcon: true)
     var result: Result?
     var productDetail: ProductModel?
-    var pagerView: FSPagerView?
+    var pagerView:  FSPagerView!
     let cache = KingfisherManager.shared.cache
     var tableView: UITableView = UITableView()
     let cellId = "TextCell"
     override func viewDidLoad() {
         super.viewDidLoad()
-         viewModel = ProductVM()
-        searchHeader = NavigationSearch(vc: self, blockInput: true, showOnlyIcon: true)
-        searchHeader?.delegate = self
-        //self.internetConnection()
+        searchHeader.delegate = self
+        self.internetConnection()
         self.view.endEditing(true)
         self.view.backgroundColor = .white
         binding()
         setup()
         if let id = result?.id {
-            viewModel?.getProduct(id: id)
+            viewModel.getProduct(id: id)
         }
     }
 
@@ -40,7 +38,7 @@ class ProducDetailVC: UIViewController {
     }
     
     func binding() {
-        viewModel?.$product.sink { [weak self] response in
+        viewModel.$product.sink { [weak self] response in
             self?.productDetail = response
             DispatchQueue.main.async {
                 self?.pagerView = FSPagerView(frame: CGRect(x: 0, y: 0, width: self?.view.frame.width ?? 0, height: 300))
@@ -69,8 +67,7 @@ class ProducDetailVC: UIViewController {
             make.leading.equalToSuperview().offset(16)
             make.trailing.equalToSuperview().offset(-16)
             make.bottom.equalToSuperview()
-            guard let search = searchHeader else { return }
-            make.top.equalTo(search.snp.bottom)
+            make.top.equalTo(searchHeader.snp.bottom)
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -79,11 +76,6 @@ class ProducDetailVC: UIViewController {
         self.view.endEditing(true)
     }
     override func viewWillDisappear(_ animated: Bool) {
-        viewModel = nil
-        searchHeader  = nil
-        pagerView = nil
-        productDetail = nil
-        result = nil
         self.clearCache()
         super.viewWillDisappear(animated)
         navigationController?.setNavigationBarHidden(false, animated: false)
